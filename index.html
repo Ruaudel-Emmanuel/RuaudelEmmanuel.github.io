@@ -131,31 +131,34 @@
         }
         
         #contact p {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             font-size: 1.1rem;
         }
 
-        #contact ul {
+        .contact-links {
             list-style: none;
             padding: 0;
             margin: 0;
-            font-size: 1.1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            justify-content: center;
         }
 
-        #contact li {
-            margin: 0.8rem 0;
-        }
-
-        #contact a {
+        .contact-links a {
+            display: block;
+            padding: 0.8rem;
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 500;
-            transition: border-bottom 0.2s ease-in-out;
-            border-bottom: 1px solid transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
         }
 
-        #contact a:hover {
-            border-bottom: 1px solid var(--accent-color);
+        .contact-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
         }
         
         footer {
@@ -231,12 +234,15 @@
         </section>
         
         <section id="contact">
-            <h2>Contact</h2>
-            <p>Prêt à discuter de votre prochain projet ?</p>
-            <ul>
-                <li>Email : <a href="mailto:ruaudel.emmanuel@orange.fr">ruaudel.emmanuel@orange.fr</a></li>
-                <li>LinkedIn : <a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362" target="_blank">linkedin.com/in/emmanuel-ruaudel</a></li>
-                <li>Localisation : Rennes, Bretagne, France</li>
+            <h2>Retrouvez-moi en ligne</h2>
+            <p>Prêt à discuter de votre prochain projet ? Contactez-moi par email ou sur l'une de ces plateformes.</p>
+            <ul class="contact-links">
+                <li><a href="mailto:ruaudel.emmanuel@orange.fr">Email</a></li>
+                <li><a href="https://github.com/Ruaudel-Emmanuel?tab=repositories" target="_blank">GitHub</a></li>
+                <li><a href="https://www.upwork.com/freelancers/~0196500c283c099531" target="_blank">Upwork</a></li>
+                <li><a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a></li>
+                <li><a href="https://comeup.com/fr/@emmanuel-ruaudel" target="_blank">ComeUp</a></li>
+                <li><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" target="_blank">LinkedIn</a></li>
             </ul>
         </section>
     </main>
