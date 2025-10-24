@@ -6,12 +6,11 @@
     <title>Emmanuel Ruaudel - Développeur Full Stack</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --primary-color: #1a1a1a;
-            --secondary-color: #242424;
-            --text-color: #e0e0e0;
-            --accent-color: #3498db;
-            --border-color: #333;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --accent-color: #007BFF;
+            --light-gray-bg: #f8f9fa;
+            --border-color: #e9ecef;
         }
 
         body {
@@ -20,68 +19,72 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 1.5rem;
         }
 
         header {
             text-align: center;
-            padding: 4rem 1rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 5rem 0;
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin: 0;
-            color: #fff;
+            font-weight: 700;
         }
 
         header .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--accent-color);
             margin-top: 0.5rem;
+            font-weight: 500;
         }
 
         header p {
             max-width: 600px;
             margin: 1rem auto 0;
             font-size: 1.1rem;
+            color: #555;
         }
 
         section {
             padding: 3rem 0;
-            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
         }
 
         h2 {
-            font-size: 2rem;
-            color: var(--accent-color);
+            font-size: 1.8rem;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-top: 0;
+            margin-bottom: 3rem;
         }
 
         /* Section Compétences */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
         }
 
         .skill-category {
-            background-color: var(--primary-color);
+            background-color: var(--light-gray-bg);
             padding: 1.5rem;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
         }
 
         .skill-category h3 {
             margin-top: 0;
-            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
         }
@@ -90,10 +93,11 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            color: #555;
         }
 
         .skill-category li {
-            padding: 0.5rem 0;
+            padding: 0.3rem 0;
         }
 
         /* Section Projets */
@@ -104,50 +108,62 @@
         }
 
         .project-card {
-            background-color: var(--primary-color);
+            background-color: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
         .project-card h3 {
             margin-top: 0;
             color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+        
+        .project-card p {
+            margin-bottom: 0;
+            color: #555;
         }
 
         /* Section Contact */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
         #contact ul {
             list-style: none;
             padding: 0;
-            text-align: center;
+            margin: 0;
             font-size: 1.1rem;
         }
 
         #contact li {
-            margin: 1rem 0;
+            margin: 0.8rem 0;
         }
 
         #contact a {
             color: var(--accent-color);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            transition: border-bottom 0.2s ease-in-out;
+            border-bottom: 1px solid transparent;
         }
 
         #contact a:hover {
-            color: #fff;
+            border-bottom: 1px solid var(--accent-color);
         }
         
         footer {
             text-align: center;
             padding: 2rem 0;
             font-size: 0.9rem;
-            color: #888;
+            color: #999;
+            border-top: 1px solid var(--border-color);
         }
 
     </style>
@@ -158,75 +174,67 @@
         <div class="container">
             <h1>Emmanuel Ruaudel</h1>
             <p class="subtitle">Développeur Full Stack | Automatisation & Solutions Digitales</p>
-            <p>Je transforme vos besoins complexes en solutions techniques robustes et évolutives, avec 20 ans d'expérience en gestion de projet pour garantir le succès de vos ambitions.</p>
+            <p>Je transforme vos besoins en solutions techniques robustes, en m'appuyant sur 20 ans d'expérience en gestion de projet pour garantir des résultats fiables et évolutifs.</p>
         </div>
     </header>
 
     <main class="container">
-        <section id="about">
-            <h2>À Propos</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto;">
-                Développeur Python full stack freelance, j'accompagne les entreprises dans la création et l'automatisation de leurs outils digitaux. Passionné par la technologie et à l'écoute des besoins, j'analyse chaque projet pour offrir des solutions sur mesure, fiables et évolutives. Fort d'une expérience de 20 ans en gestion de projet, ma rigueur et mon esprit d'analyse garantissent des applications complètes et maintenables.
-            </p>
-        </section>
-
         <section id="skills">
             <h2>Compétences</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Développement & Backend</h3>
+                    <h3>Backend & API</h3>
                     <ul>
-                        <li>&#9679; Python (Flask, Django)</li>
-                        <li>&#9679; Création et gestion d'APIs REST</li>
-                        <li>&#9679; Développement d'applications (Python, VBA)</li>
-                        <li>&#9679; Bases de données (SQL, NoSQL)</li>
+                        <li>Python (Flask, Django)</li>
+                        <li>Création d'API REST</li>
+                        <li>Bases de données (SQL, NoSQL)</li>
+                        <li>Développement d'applications</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>Automatisation & IA</h3>
+                    <h3>Automatisation & Outils</h3>
                     <ul>
-                        <li>&#9679; Automatisation de processus métiers</li>
-                        <li>&#9679; Scripting pour l'analyse de données</li>
-                        <li>&#9679; IA générative pour la formation</li>
-                        <li>&#9679; Outils de CI/CD (GitHub Actions)</li>
+                        <li>Automatisation de processus</li>
+                        <li>Scripting (Python, VBA)</li>
+                        <li>IA générative (formation)</li>
+                        <li>CI/CD (GitHub Actions)</li>
                     </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>Gestion de Projet & Soft Skills</h3>
+                    <h3>Gestion de Projet</h3>
                     <ul>
-                        <li>&#9679; Gestion de projet (20 ans d'expérience)</li>
-                        <li>&#9679; Analyse des besoins clients</li>
-                        <li>&#9679; Rigueur et esprit d'analyse</li>
-                        <li>&#9679; Organisation et respect des plannings</li>
+                        <li>Analyse des besoins</li>
+                        <li>Planification et suivi</li>
+                        <li>Rigueur et esprit d'analyse</li>
+                        <li>Communication client</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section id="projects">
-            <h2>Mes Projets</h2>
+            <h2>Projets</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <h3>Automatisation de Rapports d'Activité</h3>
-                    <p>Création d'un script Python pour automatiser la collecte de données depuis plusieurs API et bases de données, afin de générer des rapports PDF hebdomadaires. <strong>Résultat : temps de traitement manuel réduit de 90%.</strong></p>
+                    <p>Création d'un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <strong>Résultat : temps de traitement réduit de 90%.</strong></p>
                 </div>
                 <div class="project-card">
                     <h3>API REST pour une Application de Gestion</h3>
-                    <p>Conception et déploiement d'une API RESTful sécurisée pour une application de gestion de clients. L'API gère les opérations CRUD (Create, Read, Update, Delete) avec authentification pour une application front-end.</p>
+                    <p>Conception et déploiement d'une API RESTful sécurisée pour une application de gestion, gérant les opérations CRUD avec authentification.</p>
                 </div>
                 <div class="project-card">
                     <h3>Outil d'Analyse de Données avec Interface Web</h3>
-                    <p>Développement d'une application web simple (avec Flask) permettant aux utilisateurs d'uploader des fichiers CSV et de visualiser des analyses de données de base (moyennes, totaux, graphiques simples).</p>
+                    <p>Développement d'une application web (Flask) permettant d'uploader des fichiers CSV et de visualiser des analyses de données de base.</p>
                 </div>
             </div>
         </section>
         
         <section id="contact">
             <h2>Contact</h2>
-            <p style="text-align:center;">Un projet en tête ? Discutons-en !</p>
+            <p>Prêt à discuter de votre prochain projet ?</p>
             <ul>
                 <li>Email : <a href="mailto:ruaudel.emmanuel@orange.fr">ruaudel.emmanuel@orange.fr</a></li>
-                <li>Téléphone : <a href="tel:+33671457633">06 71 45 76 33</a></li>
                 <li>LinkedIn : <a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362" target="_blank">linkedin.com/in/emmanuel-ruaudel</a></li>
                 <li>Localisation : Rennes, Bretagne, France</li>
             </ul>
@@ -234,7 +242,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2025 Emmanuel Ruaudel. Tous droits réservés.</p>
+        <p>&copy; 2025 Emmanuel Ruaudel.</p>
     </footer>
 
 </body>
