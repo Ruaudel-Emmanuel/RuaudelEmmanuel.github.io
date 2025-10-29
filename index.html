@@ -1,124 +1,255 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Photographe</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      min-height: 100vh;
-      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-      color: #fff;
-      background: linear-gradient(120deg, #18181a 80%, #313133);
-      overflow-x: hidden;
-    }
-    .bg-img {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      filter: blur(7px) brightness(0.7);
-      transition: filter 0.7s;
-    }
-    .overlay {
-      position: fixed; 
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(16,16,18, 0.55);
-      z-index: 2;
-    }
-    .center-content {
-      position: relative;
-      z-index: 3;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5em;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 25px rgba(20,20,20,0.4);
-      background: linear-gradient(90deg, #fff 75%, #eee 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p {
-      font-size: 1.2rem;
-      color: #ddd;
-      text-shadow: 0 2px 15px #1010107b;
-      max-width: 420px;
-      margin: 0 auto 2em auto;
-    }
-    .cta {
-      padding: 0.8em 2em;
-      background: linear-gradient(90deg,#ee5f5b,#f8b26a);
-      color: #fff;
-      border: none;
-      border-radius: 42px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      box-shadow: 0 2px 18px #2215176c;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cta:hover {
-      transform: scale(1.08);
-      box-shadow: 0 4px 24px #22151799;
-      background: linear-gradient(90deg,#f8b26a,#ee5f5b);
-    }
-    .mini-gallery {
-      position: relative;
-      z-index: 4;
-      display: flex;
-      gap: 2em;
-      justify-content: center;
-      margin-top: 4em;
-    }
-    .mini-gallery img {
-      border-radius: 10px;
-      width: 180px;
-      box-shadow: 0 2px 18px #0006;
-      transition: transform 0.3s, box-shadow 0.3s;
-      filter: grayscale(60%) contrast(1.03);
-    }
-    .mini-gallery img:hover {
-      transform: scale(1.07) rotate(-2deg);
-      filter: grayscale(0%) contrast(1.12);
-      box-shadow: 0 8px 32px #0008;
-    }
-    @media (max-width: 750px) {
-      h1 { font-size: 2rem; }
-      .mini-gallery { flex-direction: column; gap: 1.2em; }
-      .mini-gallery img { width: 90vw; max-width: 250px; }
-      .center-content { min-height: 80vh; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Ruaudel - Développeur Full Stack</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --accent-color: #007BFF;
+            --light-gray-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        header .subtitle {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        header p {
+            max-width: 600px;
+            margin: 1rem auto 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+
+        /* Section Compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background-color: var(--light-gray-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .skill-category h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #555;
+        }
+
+        .skill-category li {
+            padding: 0.3rem 0;
+        }
+
+        /* Section Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+        
+        .project-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+        
+        .project-card p {
+            margin-bottom: 0;
+            color: #555;
+        }
+
+        /* Section Contact */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact p {
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .contact-links a {
+            display: block;
+            padding: 0.8rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .contact-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            color: #999;
+            border-top: 1px solid var(--border-color);
+        }
+
+    </style>
 </head>
 <body>
 
-  <div class="bg-img"></div>
-  <div class="overlay"></div>
-  <main class="center-content">
-    <h1>La photographie, sublimée par le web</h1>
-    <p>
-      Votre art mérite plus qu'une simple vitrine.<br>
-      Ensemble, créons un site à votre image – élégant, minimaliste, immersif.
-    </p>
-    <button class="cta">Découvrir comment</button>
-    <div class="mini-gallery">
-      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Portrait">
-      <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Paysage">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Architecture">
-    </div>
-  </main>
+    <header>
+        <div class="container">
+            <h1>Emmanuel Ruaudel</h1>
+            <p class="subtitle">Développeur Full Stack | Automatisation & Solutions Digitales</p>
+            <p>Je transforme vos besoins en solutions techniques robustes, en m'appuyant sur 20 ans d'expérience en gestion de projet pour garantir des résultats fiables et évolutifs.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="skills">
+            <h2>Compétences</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Backend & API</h3>
+                    <ul>
+                        <li>Python (Flask, Django)</li>
+                        <li>Création d'API REST</li>
+                        <li>Bases de données (SQL)</li>
+                        <li>Développement d'applications</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Automatisation & Outils</h3>
+                    <ul>
+                        <li>Automatisation de processus</li>
+                        <li>Scripting (Python, VBA)</li>
+                        <li>IA générative (formation)</li>
+                        <li>CI/CD (GitHub Actions)</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Gestion de Projet</h3>
+                    <ul>
+                        <li>Analyse des besoins</li>
+                        <li>Planification et suivi</li>
+                        <li>Rigueur et esprit d'analyse</li>
+                        <li>Communication client</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projets</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Automatisation de Rapports d'Activité</h3>
+                    <p>Création d'un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <strong>Résultat : temps de traitement réduit de 90%.</strong></p>
+                </div>
+                <div class="project-card">
+                    <h3>API REST pour une Application de Gestion</h3>
+                    <p>Conception et déploiement d'une API RESTfull pour une application de gestion, gérant les opérations de gestion de données.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Outil d'Analyse de Données avec Interface Web</h3>
+                    <p>Développement d'une application web (Flask) permettant d'uploader des fichiers CSV et de visualiser des analyses de données de base.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Retrouvez-moi en ligne</h2>
+            <p>Prêt à discuter de votre prochain projet ? Contactez-moi par email ou sur l'une de ces plateformes.</p>
+            <ul class="contact-links">
+                <li><a href="mailto:ruaudel.emmanuel@orange.fr">Email</a></li>
+                <li><a href="https://github.com/Ruaudel-Emmanuel?tab=repositories" target="_blank">GitHub</a></li>
+                <li><a href="https://www.upwork.com/freelancers/~0196500c283c099531" target="_blank">Upwork</a></li>
+                <li><a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a></li>
+                <li><a href="https://comeup.com/fr/@emmanuel-ruaudel" target="_blank">ComeUp</a></li>
+                <li><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" target="_blank">LinkedIn</a></li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Emmanuel Ruaudel.</p>
+    </footer>
+
 </body>
 </html>
