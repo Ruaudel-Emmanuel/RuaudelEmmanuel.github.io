@@ -5,251 +5,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emmanuel Ruaudel - Développeur Full Stack</title>
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --accent-color: #007BFF;
-            --light-gray-bg: #f8f9fa;
-            --border-color: #e9ecef;
-        }
-
+        /* Style global pour un site simple et propre */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            padding: 0 0 80px 0; /* Ajoute de l'espace en bas pour ne pas cacher le footer par le chatbot */
+            background-color: #ffffff;
+            color: #333333;
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 1.5rem;
         }
-
         header {
             text-align: center;
-            padding: 5rem 0;
+            padding: 3rem 0 2rem 0;
         }
-
         header h1 {
             font-size: 2.8rem;
             margin: 0;
             font-weight: 700;
         }
-
         header .subtitle {
             font-size: 1.3rem;
-            color: var(--accent-color);
+            color: #007BFF;
             margin-top: 0.5rem;
             font-weight: 500;
         }
-
-        header p {
-            max-width: 600px;
-            margin: 1rem auto 0;
-            font-size: 1.1rem;
-            color: #555;
-        }
-
         section {
-            padding: 3rem 0;
-            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            border-top: 1px solid #e9ecef;
         }
-
         h2 {
             font-size: 1.8rem;
             font-weight: 600;
             text-align: center;
             margin-top: 0;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
-
-        /* Section Compétences */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background-color: var(--light-gray-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .skill-category h3 {
-            margin-top: 0;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-        }
-
-        .skill-category ul {
+        ul {
             list-style: none;
             padding: 0;
-            margin: 0;
-            color: #555;
+            color: #555555;
         }
-
-        .skill-category li {
-            padding: 0.3rem 0;
+        ul li {
+            padding: 0.25rem 0;
         }
-
-        /* Section Projets */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .project-card {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-        }
-        
-        .project-card h3 {
-            margin-top: 0;
-            color: var(--accent-color);
-            font-size: 1.3rem;
-        }
-        
-        .project-card p {
-            margin-bottom: 0;
-            color: #555;
-        }
-
-        /* Section Contact */
-        #contact {
-            text-align: center;
-        }
-        
-        #contact p {
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .contact-links a {
-            display: block;
-            padding: 0.8rem;
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .contact-links a:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-        }
-        
         footer {
             text-align: center;
             padding: 2rem 0;
             font-size: 0.9rem;
-            color: #999;
-            border-top: 1px solid var(--border-color);
+            color: #999999;
+            border-top: 1px solid #e9ecef;
         }
 
+        /* ================= */
+        /*  STYLES DU CHATBOT */
+        /* ================= */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            max-height: 500px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 14px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        #chat-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 15px;
+            font-weight: 600;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            cursor: pointer;
+        }
+        #chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+        .message.user {
+            background: #007BFF;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        .message.bot {
+            background: #f1f1f1;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        #chat-input-area {
+            display: flex;
+            padding: 10px;
+            gap: 10px;
+            background: #f8f9fa;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+        #user-input:focus {
+            border-color: #007BFF;
+        }
+        #send-btn {
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            padding: 0 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>Emmanuel Ruaudel</h1>
-            <p class="subtitle">Développeur Full Stack | Automatisation & Solutions Digitales</p>
-            <p>Je transforme vos besoins en solutions techniques robustes, en m'appuyant sur 20 ans d'expérience en gestion de projet pour garantir des résultats fiables et évolutifs.</p>
-        </div>
+    <header class="container">
+        <h1>Emmanuel Ruaudel</h1>
+        <p class="subtitle">Développeur Full Stack | Automatisation & Solutions Digitales</p>
+        <p>Je transforme vos besoins en solutions techniques robustes, en m'appuyant sur 20 ans d'expérience en gestion de projet pour garantir des résultats fiables et évolutifs.</p>
     </header>
 
     <main class="container">
         <section id="skills">
             <h2>Compétences</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Backend & API</h3>
-                    <ul>
-                        <li>Python (Flask, Django)</li>
-                        <li>Création d'API REST</li>
-                        <li>Bases de données (SQL)</li>
-                        <li>Développement d'applications</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Automatisation & Outils</h3>
-                    <ul>
-                        <li>Automatisation de processus</li>
-                        <li>Scripting (Python, VBA)</li>
-                        <li>IA générative (formation)</li>
-                        <li>CI/CD (GitHub Actions)</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Gestion de Projet</h3>
-                    <ul>
-                        <li>Analyse des besoins</li>
-                        <li>Planification et suivi</li>
-                        <li>Rigueur et esprit d'analyse</li>
-                        <li>Communication client</li>
-                    </ul>
-                </div>
-            </div>
+            <ul>
+                <li><strong>Backend & API :</strong> Python (Flask, Django), Création d'API REST, Bases de données (SQL), Développement d'applications.</li>
+                <li><strong>Automatisation & Outils :</strong> Automatisation de processus, Scripting (Python, VBA), IA générative (en formation), CI/CD (GitHub Actions).</li>
+                <li><strong>Gestion de Projet :</strong> Analyse des besoins, Planification et suivi, Rigueur et esprit d'analyse, Communication client.</li>
+            </ul>
         </section>
 
         <section id="projects">
             <h2>Projets</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Automatisation de Rapports d'Activité</h3>
-                    <p>Création d'un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <strong>Résultat : temps de traitement réduit de 90%.</strong></p>
-                </div>
-                <div class="project-card">
-                    <h3>API REST pour une Application de Gestion</h3>
-                    <p>Conception et déploiement d'une API RESTfull pour une application de gestion, gérant les opérations de gestion de données.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Outil d'Analyse de Données avec Interface Web</h3>
-                    <p>Développement d'une application web (Flask) permettant d'uploader des fichiers CSV et de visualiser des analyses de données de base.</p>
-                </div>
-            </div>
+            <ul>
+                <li><strong>Automatisation de Rapports d'Activité :</strong> Création d'un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <em>Résultat : temps de traitement réduit de 90%.</em></li>
+                <li><strong>API REST pour une Application de Gestion :</strong> Conception et déploiement d'une API RESTful pour gérer les opérations de gestion de données.</li>
+                <li><strong>Outil d'Analyse de Données avec Interface Web :</strong> Développement d'une application web (Flask) permettant l'upload de fichiers CSV et la visualisation d'analyses de données.</li>
+            </ul>
         </section>
-        
+
         <section id="contact">
             <h2>Retrouvez-moi en ligne</h2>
             <p>Prêt à discuter de votre prochain projet ? Contactez-moi par email ou sur l'une de ces plateformes.</p>
-            <ul class="contact-links">
+            <ul>
                 <li><a href="mailto:ruaudel.emmanuel@orange.fr">Email</a></li>
                 <li><a href="https://github.com/Ruaudel-Emmanuel?tab=repositories" target="_blank">GitHub</a></li>
                 <li><a href="https://www.upwork.com/freelancers/~0196500c283c099531" target="_blank">Upwork</a></li>
                 <li><a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a></li>
-                <li><a href="https://comeup.com/fr/@emmanuel-ruaudel" target="_blank">ComeUp</a></li>
-                <li><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" target="_blank">LinkedIn</a></li>
+                <li><a href="https://comeup.com/fr/emmanuel-ruaudel" target="_blank">ComeUp</a></li>
+                <li><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362" target="_blank">LinkedIn</a></li>
             </ul>
         </section>
     </main>
-    
+
     <footer>
         <p>&copy; 2025 Emmanuel Ruaudel.</p>
     </footer>
+
+    <!-- ======================= -->
+    <!--  STRUCTURE DU CHATBOT   -->
+    <!-- ======================= -->
+    <div id="chatbot-container" aria-label="Chatbot assistant">
+        <div id="chat-header">Assistant Virtuel</div>
+        <div id="chat-box" role="log" aria-live="polite">
+            <!-- Les messages du chat apparaîtront ici -->
+        </div>
+        <div id="chat-input-area">
+            <input type="text" id="user-input" placeholder="Posez votre question..." aria-label="Message à envoyer au chatbot">
+            <button id="send-btn" aria-label="Envoyer le message">Envoyer</button>
+        </div>
+    </div>
+
+    <!-- Inclusion du script JavaScript du chatbot (doit être à la fin du body) -->
+    <script src="chat.js"></script>
 
 </body>
 </html>
