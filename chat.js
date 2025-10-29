@@ -3,9 +3,9 @@
 // =============================================================
 
 // --- CONFIGURATION ---
-// 👇 C'EST LA LIGNE LA PLUS IMPORTANTE À MODIFIER 👇
-// Remplacez cette URL par l'URL publique EXACTE que Render vous a donnée pour votre Web Service.
-const API_URL = "https://ruaudelemmanuel-github-io.onrender.com";
+// 👇 C'EST LA LIGNE QUI A ÉTÉ CORRIGÉE 👇
+// L'URL pointe maintenant vers l'endpoint '/api/chat' de votre serveur.
+const API_URL = "https://ruaudelemmanuel-github-io.onrender.com/api/chat";
 
 // --- SÉLECTION DES ÉLÉMENTS DU DOM ---
 // Assurez-vous que votre fichier HTML contient des éléments avec ces IDs.
@@ -40,7 +40,7 @@ async function sendMessage() {
     userInput.value = ''; // Vide le champ de saisie
 
     try {
-        // 2. Envoie le message à l'API back-end
+        // 2. Envoie le message à l'API back-end (maintenant avec la bonne URL)
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -50,6 +50,7 @@ async function sendMessage() {
         });
 
         if (!response.ok) {
+            // Affiche l'erreur 405 si elle se produit toujours, ou une autre erreur HTTP
             throw new Error(`Erreur HTTP: ${response.status}`);
         }
 
