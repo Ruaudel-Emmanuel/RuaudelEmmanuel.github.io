@@ -1,0 +1,9 @@
+# Ignorer le fichier des variables d'environnement
+.env
+
+# Ignorer les caches Python
+__pycache__/
+*.pyc
+
+# Autres fichiers et dossiers spécifiques à votre environnement
+.DS_Store
