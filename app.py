@@ -61,11 +61,16 @@ def chat():
     except Exception as e:
         print(f"Erreur lors de l'appel à l'API Perplexity : {e}")
         bot_response = "Désolé, une erreur technique est survenue. Veuillez réessayer plus tard."
-        return jsonify({"response": bot_response}), 500
+# ... (votre code pour la route /api/chat) ...
 
     return jsonify({'response': bot_response})
 
 
-# --- 5. Lancement du serveur (inchangé) ---
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+# Route racine pour les "health checks" de Render
+@app.route('/')
+def index():
+    return "Le serveur du chatbot est en ligne.", 200
+
+# La section "if __name__ == '__main__':" a été supprimée.
+# Le fichier s'arrête ici.
+
