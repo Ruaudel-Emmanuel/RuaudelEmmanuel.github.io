@@ -5,7 +5,7 @@
 // --- CONFIGURATION ---
 // 👇 C'EST LA LIGNE LA PLUS IMPORTANTE À MODIFIER 👇
 // Remplacez cette URL par l'URL publique EXACTE que Render vous a donnée pour votre Web Service.
-const API_URL = "https://mon-chatbot-api.onrender.com/api/chat";
+const API_URL = "https://ruaudelemmanuel-github-io.onrender.com";
 
 // --- SÉLECTION DES ÉLÉMENTS DU DOM ---
 // Assurez-vous que votre fichier HTML contient des éléments avec ces IDs.
