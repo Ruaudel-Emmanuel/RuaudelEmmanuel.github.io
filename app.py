@@ -69,8 +69,41 @@ def chat():
 # Route racine pour les "health checks" de Render
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    return "Le serveur du chatbot est en ligne.", 200
+    """
+    Ce "endpoint" reçoit le message de l'utilisateur,
+    le transmet à l'API d'IA et retourne sa réponse.
+    """
+    data = request.json
+    user_message = data.get('message')
+    status_code = 200  # Code de succès par défaut
 
-# La section "if __name__ == '__main__':" a été supprimée.
-# Le fichier s'arrête ici.
+    if not user_message:
+        bot_response = "Erreur : Aucun message n'a été fourni."
+        status_code = 400
+    else:
+        try:
+            # On communique avec l'API d'IA
+            response = client.chat.completions.create(
+                model="sonar-medium-online",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "Tu es un assistant virtuel pour un développeur Python freelance. Ton but est d'accueillir les visiteurs et de qualifier les prospects. Sois amical, professionnel et concis."
+                    },
+                    {
+                        "role": "user",
+                        "content": user_message
+                    }
+                ]
+            )
+            bot_response = response.choices[0].message.content
+
+        except Exception as e:
+            # Gérer les erreurs potentielles (clé API invalide, etc.)
+            print(f"Erreur lors de l'appel à l'API Perplexity : {e}")
+            bot_response = "Désolé, une erreur technique interne est survenue."
+            status_code = 500
+
+    # Point de sortie unique pour la fonction
+    return jsonify({'response': bot_response}), status_code
 
