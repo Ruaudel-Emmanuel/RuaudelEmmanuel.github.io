@@ -48,7 +48,7 @@ def chat():
         try:
             # Communication avec l'API Perplexity
             response = client.chat.completions.create(
-                model="sonar-large",
+                model="claude-3.5-sonnet",
                 messages=[
                     {
                         "role": "system",
