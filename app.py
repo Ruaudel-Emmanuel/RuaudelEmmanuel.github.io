@@ -12,12 +12,12 @@ CORS(app)
 # Initialisation du client pour l'API
 try:
     client = OpenAI(
-        api_key=os.getenv('PERPLEXITY_API_KEY'),
+        api_key=os.getenv('PERPLEXITY_API'),
         base_url="https://api.perplexity.ai"
     )
 except Exception as e:
     # Gérer une éventuelle erreur si la clé n'est pas définie
-    print(f"Erreur d'initialisation du client API: {e}")
+    print(f"Erreur critique d'initialisation du client API: {e}")
     client = None
 
 # --- 2. Définition des Routes ---
@@ -39,7 +39,7 @@ def chat():
     bot_response = ""
 
     if not client:
-        bot_response = "Erreur critique: Le client API n'a pas pu être initialisé. Vérifiez la clé API."
+        bot_response = "Erreur critique: Le client API n'a pas pu être initialisé. Vérifiez la clé API sur Render."
         status_code = 500
     elif not user_message:
         bot_response = "Erreur: Aucun message n'a été fourni."
@@ -52,7 +52,7 @@ def chat():
                 messages=[
                     {
                         "role": "system",
-                        "content": "Tu es un assistant virtuel pour un développeur Python freelance. Ton but est d'accueillir les visiteurs et de qualifier les prospects. Sois amical, professionnel et concis."
+                        "content": "Tu es un assistant virtuel pour un développeur Python freelance. Ton but est d'accueillir les visiteurs. Sois amical et professionnel."
                     },
                     {
                         "role": "user",
@@ -65,10 +65,8 @@ def chat():
         except Exception as e:
             # Gérer les erreurs pendant l'appel à l'API
             print(f"Erreur lors de l'appel à l'API Perplexity: {e}")
-            bot_response = "Désolé, une erreur technique interne est survenue lors de la génération de la réponse."
+            bot_response = "Désolé, une erreur technique interne est survenue. L'administrateur a été notifié."
             status_code = 500
 
-    # Point de sortie unique pour la fonction
+    # Point de sortie unique et sécurisé pour la fonction
     return jsonify({'response': bot_response}), status_code
-
-# La section "if __name__ == '__main__':" est volontairement omise pour la production.
