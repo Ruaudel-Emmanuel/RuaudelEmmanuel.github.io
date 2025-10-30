@@ -67,8 +67,8 @@ def chat():
 
 
 # Route racine pour les "health checks" de Render
-@app.route('/')
-def index():
+@app.route('/api/chat', methods=['POST'])
+def chat():
     return "Le serveur du chatbot est en ligne.", 200
 
 # La section "if __name__ == '__main__':" a été supprimée.
