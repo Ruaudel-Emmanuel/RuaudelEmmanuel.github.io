@@ -1,88 +1,52 @@
-# ========================================================
-#          app.py - Serveur Chatbot avec API Perplexity
-# ========================================================
-
-# --- 1. Imports des bibliothèques (inchangés) ---
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
-from openai import OpenAI # On utilise toujours le SDK OpenAI
+from openai import OpenAI
 
-# --- 2. Configuration initiale (inchangée) ---
+# --- 1. Configuration ---
 load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# --- 3. Configuration du client pour l'API PERPLEXITY ---
+# Initialisation du client pour l'API
+try:
+    client = OpenAI(
+        api_key=os.getenv('PERPLEXITY_API_KEY'),
+        base_url="https://api.perplexity.ai"
+    )
+except Exception as e:
+    # Gérer une éventuelle erreur si la clé n'est pas définie
+    print(f"Erreur d'initialisation du client API: {e}")
+    client = None
 
-# Récupérer la clé API Perplexity depuis le fichier .env
-api_key = os.getenv('PERPLEXITY_API_KEY')
-if not api_key:
-    raise ValueError("La clé API Perplexity n'a pas été trouvée. Assurez-vous qu'elle est dans le .env sous le nom PERPLEXITY_API_KEY")
+# --- 2. Définition des Routes ---
 
-# 👇 LA MODIFICATION CLÉ EST ICI 👇
-# On initialise le client en spécifiant l'URL de l'API Perplexity.
-client = OpenAI(
-    api_key=api_key,
-    base_url="https://api.perplexity.ai"
-)
-
-# --- 4. Définition de l'API pour le chat ---
+@app.route('/')
+def index():
+    """Route racine pour les vérifications de santé (health checks)."""
+    return "Le serveur du chatbot est en ligne.", 200
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    data = request.json
-    user_message = data.get('message')
-
-    if not user_message:
-        return jsonify({"error": "Aucun message n'a été fourni"}), 400
-
-    try:
-        # On appelle la méthode `create` exactement comme avant
-        response = client.chat.completions.create(
-            # On utilise un des modèles de Perplexity, par exemple 'sonar-medium-online'
-            # qui a accès à internet pour des réponses à jour.
-            model="sonar-medium-online",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Tu es un assistant virtuel pour un développeur Python freelance. Ton but est d'accueillir les visiteurs et de qualifier les prospects. Sois amical, professionnel et concis."
-                },
-                {
-                    "role": "user",
-                    "content": user_message
-                }
-            ]
-        )
-        
-        bot_response = response.choices[0].message.content
-
-    except Exception as e:
-        print(f"Erreur lors de l'appel à l'API Perplexity : {e}")
-        bot_response = "Désolé, une erreur technique est survenue. Veuillez réessayer plus tard."
-# ... (votre code pour la route /api/chat) ...
-
-    return jsonify({'response': bot_response})
-
-
-# Route racine pour les "health checks" de Render
-@app.route('/api/chat', methods=['POST'])
-def chat():
     """
-    Ce "endpoint" reçoit le message de l'utilisateur,
-    le transmet à l'API d'IA et retourne sa réponse.
+    Endpoint principal pour la conversation avec le chatbot.
+    Reçoit le message de l'utilisateur et retourne la réponse de l'IA.
     """
     data = request.json
     user_message = data.get('message')
-    status_code = 200  # Code de succès par défaut
+    status_code = 200
+    bot_response = ""
 
-    if not user_message:
-        bot_response = "Erreur : Aucun message n'a été fourni."
+    if not client:
+        bot_response = "Erreur critique: Le client API n'a pas pu être initialisé. Vérifiez la clé API."
+        status_code = 500
+    elif not user_message:
+        bot_response = "Erreur: Aucun message n'a été fourni."
         status_code = 400
     else:
         try:
-            # On communique avec l'API d'IA
+            # Communication avec l'API Perplexity
             response = client.chat.completions.create(
                 model="sonar-medium-online",
                 messages=[
@@ -99,11 +63,12 @@ def chat():
             bot_response = response.choices[0].message.content
 
         except Exception as e:
-            # Gérer les erreurs potentielles (clé API invalide, etc.)
-            print(f"Erreur lors de l'appel à l'API Perplexity : {e}")
-            bot_response = "Désolé, une erreur technique interne est survenue."
+            # Gérer les erreurs pendant l'appel à l'API
+            print(f"Erreur lors de l'appel à l'API Perplexity: {e}")
+            bot_response = "Désolé, une erreur technique interne est survenue lors de la génération de la réponse."
             status_code = 500
 
     # Point de sortie unique pour la fonction
     return jsonify({'response': bot_response}), status_code
 
+# La section "if __name__ == '__main__':" est volontairement omise pour la production.
