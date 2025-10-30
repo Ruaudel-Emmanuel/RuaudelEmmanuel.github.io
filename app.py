@@ -48,7 +48,7 @@ def chat():
         try:
             # Communication avec l'API Perplexity
             response = client.chat.completions.create(
-                model="llama-3.1-sonar-large-128k-online",
+                model="sonar-medium-32k-online",
                 messages=[
                     {
                         "role": "system",
