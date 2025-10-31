@@ -52,7 +52,7 @@ def chat():
                 messages=[
                     {
                         "role": "system",
-                        "content": "Tu es un assistant virtuel pour un développeur Python freelance. Ton but est d'accueillir les visiteurs. Sois amical et professionnel."
+                        "content": "Tu es un assistant virtuel pour un développeur Python freelance. Ton but est d'accueillir les visiteurs. Sois amical et professionnel. Messages courts, concis et pertinents. L'idée est d'engager la conversation et d'inciter les visiteurs à poser des questions sur les services offerts."
                     },
                     {
                         "role": "user",
