@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
+<section id="github-media">
+  <h2>Mes Projets GitHub</h2>
+  <div id="github-projects" class="project-list"></div>
+</section>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Développeur — automatisation, IA et api</title>
     <style>
+        .project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin: 2rem 0;
+        }
+        .project-card {
+        opacity: 0;
+        transform: translateY(30px);
+        background: #f5f8fb;
+        border-radius: 8px;
+        padding: 1.1rem 1.6rem;
+        box-shadow: 0 4px 12px rgba(50,70,110,0.04);
+        animation: fadeUp 0.7s forwards;
+        }
+        .project-card:nth-child(n) {
+        animation-delay: calc(0.1s * var(--project-index));
+        }
+        @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+        .project-meta { color: #888; font-size: 0.92rem; margin-top: 0.5rem; }
+        .project-stars { color: #f1c40f; margin-left: 8px; }
+
         /* Style global pour un site simple et propre */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;

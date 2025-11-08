@@ -83,3 +83,26 @@ userInput.addEventListener('keypress', function(event) {
 // window.addEventListener('load', () => {
 //     displayMessage("Bonjour ! Comment puis-je vous aider aujourd'hui ?", 'bot');
 // });
+const username = 'Ruaudel-Emmanuel'; // Mets ici ton identifiant GitHub
+const projectsDiv = document.getElementById('github-projects');
+
+fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
+  .then(response => response.json())
+  .then(repos => {
+    projectsDiv.innerHTML = ''; // Vide avant d'insérer
+    repos.forEach((repo, idx) => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.style.setProperty('--project-index', idx);
+
+      const stars = repo.stargazers_count ? `<span class="project-stars">⭐ ${repo.stargazers_count}</span>` : '';
+      const lang = repo.language ? `<span class="project-meta">${repo.language}</span>` : '';
+
+      card.innerHTML = `
+        <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+        <p>${repo.description ? repo.description : ''}</p>
+        <div>${lang}${stars}</div>
+      `;
+      projectsDiv.appendChild(card);
+    });
+  });
