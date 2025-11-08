@@ -1,8 +1,11 @@
-from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
+from flask_mail import Mail, Message
+import os
+
+
 
 # --- 1. Configuration ---
 load_dotenv()
@@ -62,7 +65,7 @@ def chat():
                         "Si un utilisateur semble intéressé par une collaboration ou demande comment vous contacter,"
                         "encouragez-le à envoyer un mail en le présentant comme la meilleure étape."
                         "Fournissez l'adresse Ruaudel.emmanuel@orange.fr et ajoutez une phrase d'encouragement comme 'Je vous répondrai sous 24h'."
-                    
+
                     },
                     {
                         "role": "user",
@@ -83,3 +86,52 @@ def chat():
 
     # Point de sortie unique et sécurisé pour la fonction
     return jsonify({'response': bot_response}), status_code
+
+
+app = Flask(__name__)
+app.secret_key = 'remplace_ici_par_une_valeur_secrète'
+
+# Configuration pour Flask-Mail (adapte selon ton fournisseur de mail)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = os.getenv("ruaudel.emmanuel@orange.fr") # Adresse email expéditrice
+app.config['MAIL_PASSWORD'] = os.getenv("#Semaine32") # Mot de passe ou mot de passe d’application
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_USERNAME")
+
+mail = Mail(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        sender = request.form.get('email')
+        message = request.form.get('message')
+
+        if not name or not sender or not message:
+            flash("Tous les champs sont obligatoires.", "error")
+            return redirect(url_for('contact'))
+
+        try:
+            msg = Message(subject=f"Nouveau message de {name}",
+                          sender=sender,
+                          recipients=[app.config['MAIL_USERNAME']],
+                          body=message + f"\n\nEmail de contact : {sender}")
+            mail.send(msg)
+            flash("Votre message a bien été envoyé !", "success")
+            return redirect(url_for('contact'))
+        except Exception as e:
+            print(e)
+            flash("Une erreur s’est produite lors de l’envoi. Veuillez réessayer plus tard.", "error")
+            return redirect(url_for('contact'))
+
+    return render_template('contact.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
