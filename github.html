@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Projets GitHub - Emmanuel Ruaudel</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0 0 80px 0;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    header {
+      text-align: center;
+      padding: 3rem 0 2rem 0;
+    }
+    header h1 {
+      font-size: 2.1rem;
+      margin: 0;
+      font-weight: 700;
+    }
+    a.home-link {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      padding: 8px 16px;
+      background: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    h2 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .project-card {
+      opacity: 0;
+      transform: translateY(30px);
+      background: #f5f8fb;
+      border-radius: 8px;
+      padding: 1.1rem 1.6rem;
+      box-shadow: 0 4px 12px rgba(50,70,110,0.05);
+      animation: fadeUp 0.7s forwards;
+    }
+    .project-card:nth-child(n) {
+      animation-delay: calc(0.09s * var(--project-index));
+    }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .project-meta {
+      color: #888;
+      font-size: 0.92rem;
+      margin-top: 0.5rem;
+      margin-right: 12px;
+    }
+    .project-stars {
+      color: #f1c40f;
+      margin-left: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem 0;
+      font-size: 0.95rem;
+      color: #888;
+      border-top: 1px solid #e9ecef;
+    }
+  </style>
+</head>
+<body>
+  <a class="home-link" href="index.html">Retour Accueil</a>
+  <header class="container">
+    <h1>Mes Projets GitHub</h1>
+    <p>Liste dynamique des dépôts publics, mise à jour en temps réel !</p>
+  </header>
+  <main class="container">
+    <div id="github-projects" class="project-list"></div>
+  </main>
+  <footer>
+    &copy; 2025 Emmanuel Ruaudel.
+  </footer>
+  <script>
+    const username = 'NOM_UTILISATEUR_GITHUB'; // Remplace par ton identifiant GitHub
+    const projectsDiv = document.getElementById('github-projects');
+    fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
+      .then(response => response.json())
+      .then(repos => {
+        projectsDiv.innerHTML = '';
+        repos.forEach((repo, idx) => {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          card.style.setProperty('--project-index', idx);
+          const stars = repo.stargazers_count ? `<span class="project-stars">⭐ ${repo.stargazers_count}</span>` : '';
+          const lang = repo.language ? `<span class="project-meta">${repo.language}</span>` : '';
+          card.innerHTML = `
+            <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+            <p>${repo.description ? repo.description : ''}</p>
+            <div>${lang}${stars}</div>
+          `;
+          projectsDiv.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
