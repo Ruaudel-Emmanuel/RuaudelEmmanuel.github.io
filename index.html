@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Développeur - Emmanuel Ruaudel</title>
+  <title>Emmanuel Ruaudel — Développeur & Automatisation</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0 0 80px 0;
+      margin: 0; padding: 0 0 80px 0;
       background-color: #fff;
       color: #333;
       line-height: 1.7;
@@ -34,6 +33,29 @@
       margin-top: 0.5rem;
       font-weight: 500;
     }
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: inline-flex;
+      gap: 1.5rem;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover {
+      color: #333;
+      text-decoration: underline;
+    }
     section {
       padding: 2rem 0;
       border-top: 1px solid #e9ecef;
@@ -53,49 +75,20 @@
     ul li {
       padding: 0.25rem 0;
     }
-    /* Github projects CSS */
-    .project-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin: 2rem 0;
-    }
-    .project-card {
-      opacity: 0;
-      transform: translateY(30px);
+    .highlight {
       background: #f5f8fb;
-      border-radius: 8px;
-      padding: 1.1rem 1.6rem;
-      box-shadow: 0 4px 12px rgba(50,70,110,0.04);
-      animation: fadeUp 0.7s forwards;
-    }
-    .project-card:nth-child(n) {
-      animation-delay: calc(0.09s * var(--project-index));
-    }
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .project-meta {
-      color: #888;
-      font-size: 0.92rem;
-      margin-top: 0.5rem;
-      margin-right: 12px;
-    }
-    .project-stars {
-      color: #f1c40f;
-      margin-left: 8px;
+      border-radius: 6px;
+      padding: 0.3rem 0.7rem;
+      font-weight: 500;
     }
     footer {
       text-align: center;
-      padding: 2rem 0;
+      padding: 2rem 0 1rem 0;
       font-size: 0.9rem;
       color: #999;
       border-top: 1px solid #e9ecef;
     }
-    /* Styles basiques pour le chatbot */
+    /* Chatbot Styles */
     #chatbot-container {
       position: fixed;
       bottom: 20px;
@@ -189,27 +182,50 @@
     <p class="subtitle">Développeur Full Stack & Automatisation | IA & API</p>
     <p>Je transforme vos besoins en solutions techniques robustes, en m'appuyant sur 10 ans d'expérience en gestion de projets pour garantir des résultats fiables et évolutifs.</p>
   </header>
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="github.html">Mes Projets GitHub</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
   <main class="container">
     <section id="skills">
       <h2>Compétences</h2>
       <ul>
-        <li><strong>Backend & API :</strong> Python, Flask, Django, Création d'API, Développement d'applications.</li>
-        <li><strong>Automatisation / Outils :</strong> Automatisation de processus, Scripting Python, IA générative, CI/CD GitHub Actions.</li>
-        <li><strong>Gestion de Projet :</strong> Analyse des besoins, Planification, Suivi qualité, Communication client.</li>
+        <li><span class="highlight">Backend & API :</span> Python, Flask, Django, Création d'API, Développement d'applications.</li>
+        <li><span class="highlight">Automatisation / Outils :</span> Automatisation de processus, Scripting Python, IA générative, CI/CD GitHub Actions.</li>
+        <li><span class="highlight">Gestion de Projet :</span> Analyse des besoins, Planification, Suivi qualité, Communication client.</li>
       </ul>
     </section>
-    <section id="github-media">
-      <h2>Mes Projets GitHub</h2>
-      <div id="github-projects" class="project-list">
-        <!-- Projets affichés dynamiquement -->
+    <section id="projects">
+      <h2>Quelques projets clients</h2>
+      <ul>
+        <li>
+          <strong>Automatisation de Rapports d'Activité</strong><br>
+          Création d'un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <em>Résultat : temps de traitement réduit de 90%.</em>
+        </li>
+        <li>
+          <strong>API REST pour une Application de Gestion</strong><br>
+          Conception et déploiement d'une API RESTful pour gérer les opérations de gestion de données d'une PME.
+        </li>
+        <li>
+          <strong>Outil d'Analyse de Données avec Interface Web</strong><br>
+          Développement d'une application web Flask permettant l'upload de fichiers CSV et la visualisation d'analyses de données.
+        </li>
+      </ul>
+      <div style="margin-top:2rem;text-align:center;">
+        <a href="github.html" style="color:#007BFF;font-weight:600;">Voir tous mes projets sur GitHub &rarr;</a>
       </div>
     </section>
     <section id="contact">
       <h2>Retrouvez-moi en ligne</h2>
-      <p>Prêt à discuter de votre prochain projet ? Contactez-moi par email ou sur l'une de ces plateformes.</p>
+      <p>Prêt à discuter de votre prochain projet ? Contactez-moi par email ou sur l'une de ces plateformes :</p>
       <ul>
         <li><a href="mailto:ruaudelemmanuel@orange.fr">Par Email</a></li>
-        <li><a href="https://github.com/Ruaudel-Emmanuel?tab=repositories" target="_blank">Mon GitHub</a></li>
+        <li><a href="https://github.com/NOM_UTILISATEUR_GITHUB?tab=repositories" target="_blank">Mon GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362" target="_blank">Mon LinkedIn</a></li>
       </ul>
     </section>
@@ -217,11 +233,6 @@
   <footer>
     &copy; 2025 Emmanuel Ruaudel.
   </footer>
-<ul>
-  <!-- autres liens -->
-  <li><a href="github.html">Mes Projets GitHub</a></li>
-</ul>
-
   <!-- Chatbot -->
   <div id="chatbot-container" aria-label="Chatbot assistant">
       <div id="chat-header">Assistant Virtuel</div>
@@ -233,31 +244,6 @@
         <button id="send-btn" aria-label="Envoyer le message">Envoyer</button>
       </div>
   </div>
-  <!-- Chargement dynamque des projets GitHub -->
-  <script>
-    const username = 'Ruaudel-Emmanuel'; // Remplace par ton identifiant GitHub
-    const projectsDiv = document.getElementById('github-projects');
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
-      .then(response => response.json())
-      .then(repos => {
-        projectsDiv.innerHTML = '';
-        repos.forEach((repo, idx) => {
-          const card = document.createElement('div');
-          card.className = 'project-card';
-          card.style.setProperty('--project-index', idx);
-
-          const stars = repo.stargazers_count ? `<span class="project-stars">⭐ ${repo.stargazers_count}</span>` : '';
-          const lang = repo.language ? `<span class="project-meta">${repo.language}</span>` : '';
-
-          card.innerHTML = `
-            <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
-            <p>${repo.description ? repo.description : ''}</p>
-            <div>${lang}${stars}</div>
-          `;
-          projectsDiv.appendChild(card);
-        });
-      });
-  </script>
   <!-- Inclusion du script du chatbot -->
   <script src="chat.js"></script>
 </body>
