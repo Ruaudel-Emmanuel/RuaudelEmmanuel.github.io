@@ -3,7 +3,7 @@
 # ==============================================================================
 # --- IMPORTATIONS ---
 # ------------------------------------------------------------------------------
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template 
 import os
 import openai
 from flask_cors import CORS
@@ -38,7 +38,19 @@ mail = Mail(app)
 # ------------------------------------------------------------------------------
 @app.route('/')
 def index():
-    return "Le serveur du chatbot et du mail est en ligne."
+    return render_template('index.html')
+
+# Route pour servir la page de contact
+@app.route('/contact')
+def contact():
+    # Flask va automatiquement chercher 'Contact.html' dans le dossier /templates
+    return render_template('Contact.html')
+
+# Route pour servir la page GitHub
+@app.route('/github')
+def github():
+    # Flask va chercher 'github.html' dans le dossier /templates
+    return render_template('github.html')
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
