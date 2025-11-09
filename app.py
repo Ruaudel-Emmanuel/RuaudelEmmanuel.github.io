@@ -96,8 +96,8 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = os.getenv("Mail-user") # Adresse email expéditrice
-app.config['MAIL_PASSWORD'] = os.getenv("Mail-password") # Mot de passe ou mot de passe d’application
+app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME") # Adresse email expéditrice
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD") # Mot de passe ou mot de passe d’application
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_USERNAME")
 
 mail = Mail(app)
