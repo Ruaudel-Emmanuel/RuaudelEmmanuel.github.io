@@ -2,9 +2,9 @@
 
 
 
-Projet de Site Web Portfolio avec Chatbot IA
+Projet de Site Web Portfolio 
 
-Ce projet est un site web portfolio personnel qui inclut une page de contact fonctionnelle et un assistant virtuel (chatbot) basé sur l'API d'OpenAI. Le backend est une application Flask conçue pour être déployée sur des services comme Render.
+Ce projet est un site web portfolio personnel qui inclut une page de contact fonctionnelle. Le backend est une application Flask conçue pour être déployée sur des services comme Render.
 
 
 
@@ -38,17 +38,6 @@ Backend (app.py)
 
 Le fichier app.py a été entièrement réécrit pour plus de clarté, de sécurité et de fonctionnalité.
 
-
-
-Création d'Endpoints API dédiés :
-
-
-
-/api/chat : Une nouvelle route a été créée pour gérer exclusivement les requêtes du chatbot. Elle reçoit le message de l'utilisateur, le transmet à l'API d'OpenAI et renvoie la réponse.
-
-
-
-/send\_message : Une route a été ajoutée pour traiter les soumissions du formulaire de contact. Elle utilise Flask-Mail pour envoyer les messages reçus directement par e-mail.
 
 
 
@@ -141,4 +130,5 @@ MAIL\_PASSWORD="votre\_mot\_de\_passe\_email\_ou\_d\_application"
 MAIL\_USE\_TLS=True
 
 MAIL\_USE\_SSL=False
+
 
