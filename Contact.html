@@ -1,55 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Contact</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    form { max-width:430px;margin:2rem auto;padding:2rem 2rem;background:#f9fafd;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.07);}
-    .form-group { display:flex; flex-direction:column; margin-bottom:1.2rem;}
-    label { font-weight:600; color:#007BFF; margin-bottom:0.4rem;}
-    input, textarea { font-size:1rem; padding:0.65rem 1rem; border:1px solid #d0d3da; border-radius:6px; transition:border 0.2s;}
-    input:focus, textarea:focus { border-color:#007BFF; background:#f5faff;}
-    button { background:#007BFF; color:#fff; border:none; padding:0.8rem; border-radius:8px; font-size:1.08rem; font-weight:600; cursor:pointer;}
-    button:hover { background:#0056b3;}
-    .message-flash {text-align:center; font-weight:600;}
-    .success {color:#219150;}
-    .error {color:#d82323;}
-    @media (max-width: 540px){ form { padding:1rem 0.5rem;}}
-  </style>
-</head>
-<body>
-  <h1 style="text-align:center;">Contactez-moi</h1>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, msg in messages %}
-      <div class="message-flash {{category}}">{{ msg }}</div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
-  <form method="POST" autocomplete="off">
-    <div class="form-group">
-      <label for="name">Nom&nbsp;:</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Email&nbsp;:</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="message">Message&nbsp;:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-    </div>
-    <button type="submit">Envoyer</button>
-  </form>
-  <form action="https://ruaudelemmanuel-github-io.onrender.com/send_message" method="POST">
-    <!-- Vos champs input et textarea ici... -->
-    <!-- Exemple : -->
-    <input type="text" name="name" placeholder="Votre Nom" required>
-    <input type="email" name="email" placeholder="Votre Email" required>
-    <textarea name="message" placeholder="Votre Message" required></textarea>
-    <button type="submit">Envoyer</button>
-</form>
-
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      form { max-width: 430px; margin: 2rem auto; padding: 2rem 2rem; background: #f9fafb; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+      .form-group { display: flex; flex-direction: column; margin-bottom: 1.2rem; }
+      label { font-weight: 600; color: #007BFF; margin-bottom: 0.4rem; }
+      input, textarea { font-size: 1rem; padding: 0.65rem 1rem; border: 1px solid #d0d3da; border-radius: 6px; transition: border 0.2s; }
+      input:focus, textarea:focus { border-color: #007BFF; background: #f5faff; }
+      button { background: #007BFF; color: #fff; border: none; padding: 0.8rem; border-radius: 8px; font-size: 1.08rem; font-weight: 600; cursor: pointer; }
+      button:hover { background: #0056b3; }
+      .message-flash { text-align: center; font-weight: 600; margin-bottom: 1rem; }
+      .success { color: #219150; }
+      .error { color: #d82323; }
+      @media (max-width: 540px) { form { padding: 1rem 0.5rem; } }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align:center;">Contactez-moi</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="message-flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form action="/sendmessage" method="POST" autocomplete="off">
+      <div class="form-group">
+        <label for="name">Nom&nbsp;:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email&nbsp;:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message&nbsp;:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Envoyer</button>
+    </form>
+  </body>
 </html>
