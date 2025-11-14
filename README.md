@@ -1,134 +1,79 @@
-# RuaudelEmmanuel.github.io
+# Portfolio développeur – Flask
 
+Ce dépôt contient le code source d’un petit site de portfolio développé avec Flask, incluant une page de contact fonctionnelle et plusieurs pages statiques (accueil, contact, page GitHub, etc.).  
 
+## Fonctionnalités
 
-Projet de Site Web Portfolio 
+- Affichage de pages HTML statiques (portfolio, compétences, projets, liens GitHub…).  
+- Formulaire de contact accessible via `/Contact.html`.  
+- Validation basique du formulaire côté serveur (vérification que tous les champs sont remplis).  
+- Messages flash pour informer l’utilisateur en cas d’erreur ou de succès lors de l’envoi du formulaire.  
+- Gestion des requêtes CORS via Flask-Cors.  
 
-Ce projet est un site web portfolio personnel qui inclut une page de contact fonctionnelle. Le backend est une application Flask conçue pour être déployée sur des services comme Render.
+## Technologies utilisées
 
+- Python 3  
+- Flask  
+- Flask-Cors  
+- Gunicorn (pour le déploiement en production)  
+- HTML / CSS (pages `index.html`, `Contact.html`, `github.html`, etc.)  
 
+Les dépendances Python sont listées dans le fichier `requirements.txt`.  
 
-Corrections et Améliorations (Novembre 2025)
+## Installation
 
-Une mise à jour majeure a été effectu
+1. Cloner le dépôt :
 
-ée pour corriger plusieurs problèmes critiques qui empêchaient le bon fonctionnement du site :
 
+2. Créer et activer un environnement virtuel (recommandé) :
 
 
-Lien de Contact Inactif : Le lien "Contact" dans la navigation ne redirigeait pas vers la page de contact.
+3. Installer les dépendances :
 
 
+## Configuration
 
-Chatbot Non Fonctionnel : L'assistant virtuel ne parvenait plus à se connecter au backend, rendant toute communication impossible.
+L’application utilise une clé secrète pour les sessions Flask (messages flash).  
+Dans `app.py`, remplace la valeur de :
 
 
+par une vraie clé secrète générée aléatoirement.  
 
-Formulaire de Contact Inopérant : L'envoi de messages depuis le formulaire de contact ne fonctionnait pas.
+Si besoin, tu peux également ajouter un fichier `.env` pour centraliser les variables d’environnement (par exemple pour une future configuration d’envoi d’e-mails via Flask-Mail).  
 
+## Lancement en développement
 
+Lancer le serveur Flask en mode développement :
 
-Ces problèmes ont été résolus en restructurant à la fois le code du backend et certaines parties du frontend.
 
+Par défaut, l’application tourne en mode `debug=True` sur `http://127.0.0.1:5000/`.  
 
+- La page de contact est accessible à l’URL : `http://127.0.0.1:5000/Contact.html`  
 
-Détail des Modifications Techniques
+## Déploiement (exemple)
 
-Backend (app.py)
+Pour un déploiement sur un serveur (Linux), tu peux utiliser Gunicorn :
 
-Le fichier app.py a été entièrement réécrit pour plus de clarté, de sécurité et de fonctionnalité.
 
+Adapte ensuite la configuration avec un serveur web (Nginx, etc.) pour servir l’application en production.  
 
+## Structure du projet
 
+Exemple de structure minimale :
 
-Sécurité et Configuration :
 
+Les fichiers HTML doivent se trouver dans le dossier `templates` pour être correctement rendus par `render_template`.  
 
+## Améliorations possibles
 
-Variables d'Environnement : Toutes les informations sensibles (clé API d'OpenAI, identifiants de messagerie) ont été externalisées. Elles doivent maintenant être configurées via des variables d'environnement, ce qui est une pratique de sécurité essentielle.
+- Brancher réellement le formulaire de contact à un service d’envoi d’e-mails (Flask-Mail, API externe…).  
+- Ajouter une validation plus poussée (vérification du format d’e-mail, captcha, etc.).  
+- Ajouter d’autres pages (blog, projets détaillés, CV en ligne…).  
+- Mettre en place des tests automatisés et un pipeline CI/CD complet.  
 
+## Licence
 
+Préciser ici la licence de ton choix (par exemple MIT, GPL, ou « Tous droits réservés »).
 
-CORS (Cross-Origin Resource Sharing) : L'extension Flask-CORS a été intégrée pour autoriser les requêtes provenant du site web frontend (hébergé sur un domaine différent) vers le backend, résolvant ainsi les erreurs de communication.
-
-
-
-Frontend (index.html, Contact.html, chat.js)
-
-index.html :
-
-
-
-Le lien de navigation vers la page de contact a été corrigé pour pointer vers Contact.html au lieu d'une ancre invalide.
-
-
-
-Contact.html :
-
-
-
-L'attribut action de la balise <form> a été mis à jour pour pointer vers l'URL complète du nouvel endpoint backend (https://<votre-domaine-render>/send\_message).
-
-
-
-chat.js :
-
-
-
-La variable API\_URL a été mise à jour pour pointer vers le nouvel endpoint du chatbot sur Render (https://<votre-domaine-render>/api/chat).
-
-
-
-Configuration et Déploiement
-
-Pour que l'application fonctionne correctement (localement ou sur Render), les étapes suivantes sont nécessaires.
-
-
-
-1\. Fichier requirements.txt
-
-Assurez-vous que votre fichier requirements.txt contient les dépendances suivantes :
-
-
-
-text
-
-Flask
-
-Flask-Cors
-
-openai
-
-python-dotenv
-
-Flask-Mail
-
-2\. Variables d'Environnement
-
-Vous devez configurer les variables d'environnement suivantes dans votre service d'hébergement (par exemple, dans la section "Secrets" ou "Environment" de Render) ou dans un fichier .env pour le développement local.
-
-
-
-text
-
-\# Clé API pour le chatbot
-
-OPENAI\_API\_KEY="votre\_clé\_api\_openai"
-
-
-
-\# Configuration pour l'envoi d'e-mails via le formulaire de contact
-
-MAIL\_SERVER="smtp.votre\_fournisseur.com"
-
-MAIL\_PORT=587
-
-MAIL\_USERNAME="votre\_adresse@email.com"
-
-MAIL\_PASSWORD="votre\_mot\_de\_passe\_email\_ou\_d\_application"
-
-MAIL\_USE\_TLS=True
-
-MAIL\_USE\_SSL=False
 
 
