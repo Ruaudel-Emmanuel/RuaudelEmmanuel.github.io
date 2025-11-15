@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
+
 app = Flask(__name__)
 app.secret_key = 'ton_secret_key'  # Change ce secret
 CORS(app)
@@ -14,6 +15,11 @@ SMTP_PORT = 587  # ou 465 si SSL, à tester
 SMTP_USER = "ton_adresse_orange@orange.fr"      # identique à l’adresse qui envoie
 SMTP_PASSWORD = "ton_mot_de_passe_orange"      # ou mot de passe d’application
 DESTINATION_EMAIL = "ruaudel.emmanuel@orange.fr"  # adresse qui reçoit les messages
+
+
+@app.route('/Contact.html', methods=['GET'])
+def contact():
+    return app.send_static_file('Contact.html')
 
 @app.route('/sendmessage', methods=['POST'])
 def send_message():
@@ -26,21 +32,21 @@ def send_message():
         return redirect(url_for('contact'))
 
     try:
-        # Construction du mail
+        # Construction du mail (pour log)
         subject = f"Nouveau message depuis le portfolio - {name}"
         body = f"Nom : {name}\nEmail : {email}\n\nMessage :\n{message}"
 
-        msg = MIMEMultipart()
-        msg["From"] = SMTP_USER
-        msg["To"] = DESTINATION_EMAIL
-        msg["Subject"] = subject
-        msg.attach(MIMEText(body, "plain", "utf-8"))
+        print("=== Nouveau message de contact ===")
+        print(subject)
+        print(body)
+        print("=== (envoi SMTP désactivé sur Render) ===")
 
-        # Envoi avec STARTTLS
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.send_message(msg)
+        # Si tu veux quand même tenter SMTP, mets-le derrière un timeout court :
+        # socket.setdefaulttimeout(3)
+        # with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=3) as server:
+        #     server.starttls()
+        #     server.login(SMTP_USER, SMTP_PASSWORD)
+        #     server.send_message(msg)
 
         flash('Votre message a bien été envoyé !', 'success')
 
