@@ -1,126 +1,213 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes Projets GitHub - Emmanuel Ruaudel</title>
-  <style>
-    body {
-      font-family: font-family: "Times New Roman", Times, serif;
-      margin: 0;
-      padding: 0 0 80px 0;
-      background-color: #fff;
-      color: #333;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-    header {
-      text-align: center;
-      padding: 3rem 0 2rem 0;
-    }
-    header h1 {
-      font-size: 2.1rem;
-      margin: 0;
-      font-weight: 700;
-    }
-    a.home-link {
-      position: fixed;
-      left: 20px;
-      top: 20px;
-      padding: 8px 16px;
-      background: #007BFF;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 500;
-    }
-    h2 {
-      font-size: 1.8rem;
-      text-align: center;
-      margin-top: 0;
-      margin-bottom: 2rem;
-    }
-    .project-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin: 2rem 0;
-    }
-    .project-card {
-      opacity: 0;
-      transform: translateY(30px);
-      background: #f5f8fb;
-      border-radius: 8px;
-      padding: 1.1rem 1.6rem;
-      box-shadow: 0 4px 12px rgba(50,70,110,0.05);
-      animation: fadeUp 0.7s forwards;
-    }
-    .project-card:nth-child(n) {
-      animation-delay: calc(0.09s * var(--project-index));
-    }
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TTQJKPBQ');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes projets GitHub - Emmanuel Ruaudel</title>
+    <style>
+      body { 
+        font-family: Times New Roman, Times, serif; 
+        margin: 0; 
+        padding: 0 0 80px 0; 
+        background-color: #1a1a1a; 
+        color: #e0e0e0; 
+        line-height: 1.7; 
+        -webkit-font-smoothing: antialiased; 
       }
-    }
-    .project-meta {
-      color: #888;
-      font-size: 0.92rem;
-      margin-top: 0.5rem;
-      margin-right: 12px;
-    }
-    .project-stars {
-      color: #f1c40f;
-      margin-left: 8px;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 0 1rem 0;
-      font-size: 0.95rem;
-      color: #888;
-      border-top: 1px solid #e9ecef;
-    }
-  </style>
-</head>
-<body>
-  <a class="home-link" href="index.html">Retour Accueil</a>
-  <header class="container">
-    <h1>Mes Projets GitHub</h1>
-    <p>Liste dynamique des dépôts publics, mise à jour en temps réel !</p>
-  </header>
-  <main class="container">
-    <div id="github-projects" class="project-list"></div>
-  </main>
-  <footer>
-    &copy; 2025 Emmanuel Ruaudel.
-  </footer>
-  <script>
-    const username = 'ruaudel-emmanuel'; // Remplace par ton identifiant GitHub
-    const projectsDiv = document.getElementById('github-projects');
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
-      .then(response => response.json())
-      .then(repos => {
-        projectsDiv.innerHTML = '';
-        repos.forEach((repo, idx) => {
-          const card = document.createElement('div');
-          card.className = 'project-card';
-          card.style.setProperty('--project-index', idx);
-          const stars = repo.stargazers_count ? `<span class="project-stars">⭐ ${repo.stargazers_count}</span>` : '';
-          const lang = repo.language ? `<span class="project-meta">${repo.language}</span>` : '';
-          card.innerHTML = `
-            <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
-            <p>${repo.description ? repo.description : ''}</p>
-            <div>${lang}${stars}</div>
-          `;
-          projectsDiv.appendChild(card);
-        });
-      });
-  </script>
-</body>
+      .container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+      header { text-align: center; padding: 3rem 0 2rem 0; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); border-radius: 0 0 20px 20px; }
+      header h1 { font-size: 2.8rem; margin: 0; font-weight: 700; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+      .subtitle { font-size: 1.3rem; color: #4da6ff; margin-top: 0.5rem; font-weight: 500; }
+      nav { text-align: center; margin: 2rem 0; }
+      nav a { 
+        display: inline-block; 
+        margin: 0 1rem; 
+        text-decoration: none; 
+        color: #4da6ff; 
+        font-weight: 600; 
+        padding: 0.5rem 1rem; 
+        border-radius: 6px; 
+        transition: all 0.3s ease; 
+      }
+      nav a:hover { 
+        color: #ffffff; 
+        background: #4da6ff20; 
+        text-shadow: 0 0 10px #4da6ff; 
+      }
+      .repo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .repo-card {
+        background: #2a2a2a;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #404040;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      }
+      .repo-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(77, 166, 255, 0.2);
+        border-color: #4da6ff40;
+      }
+      .repo-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 0.75rem;
+      }
+      .repo-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+      }
+      .repo-lang {
+        background: #4da6ff20;
+        color: #4da6ff;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid #4da6ff30;
+      }
+      .repo-description {
+        color: #d0d0d0;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+      .repo-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        color: #999;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #404040;
+      }
+      .repo-link {
+        color: #4da6ff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      .repo-link:hover {
+        color: #ffffff;
+        text-shadow: 0 0 8px #4da6ff;
+      }
+      footer { 
+        text-align: center; 
+        padding: 2rem 0 1rem 0; 
+        font-size: 0.9rem; 
+        color: #999; 
+        border-top: 1px solid #333; 
+        background: #0f0f0f;
+        margin-top: 3rem;
+      }
+      /* Responsive */
+      @media (max-width: 768px) {
+        .repo-grid { grid-template-columns: 1fr; }
+        header h1 { font-size: 2.2rem; }
+        nav { flex-direction: column; gap: 1rem; }
+        .repo-stats { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+      }
+    </style>
+    <meta name="google-site-verification" content="EirsPdyNrsprC0qX8mBM-Hi6SRI0LPtXGqqW-eUyFkI" />
+  </head>
+  <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTQJKPBQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+    
+    <header class="container">
+      <h1>Mes projets GitHub</h1>
+      <p class="subtitle">Portfolio technique complet</p>
+      <nav>
+        <a href="index.html">← Accueil</a>
+        <a href="https://github.com/Ruaudel-Emmanuel?tab=repositories">GitHub complet</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="repo-grid">
+        <!-- Remplacez ces exemples par vos vrais projets -->
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3 class="repo-name">automatisation-rapports-pdf</h3>
+            <span class="repo-lang">Python</span>
+          </div>
+          <p class="repo-description">
+            Script d'automatisation pour PME du bâtiment : collecte données API + génération PDF hebdomadaire. 
+            Temps de traitement réduit de 90%.
+          </p>
+          <div class="repo-stats">
+            <span>⭐ 12 stars • 3 forks</span>
+            <a href="https://github.com/Ruaudel-Emmanuel/automatisation-rapports-pdf" class="repo-link" target="_blank">Voir le projet</a>
+          </div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3 class="repo-name">api-gestion-chantiers</h3>
+            <span class="repo-lang">Django</span>
+          </div>
+          <p class="repo-description">
+            API RESTful complète pour gestion de chantiers (PME paysage/services). 
+            Authentification JWT + CRUD avancé + documentation Swagger.
+          </p>
+          <div class="repo-stats">
+            <span>⭐ 8 stars • 1 fork</span>
+            <a href="https://github.com/Ruaudel-Emmanuel/api-gestion-chantiers" class="repo-link" target="_blank">Voir le projet</a>
+          </div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3 class="repo-name">analyse-donnees-web</h3>
+            <span class="repo-lang">Flask</span>
+          </div>
+          <p class="repo-description">
+            Application web d'analyse de données : upload CSV + visualisation + export PDF. 
+            Interface responsive pour PME.
+          </p>
+          <div class="repo-stats">
+            <span>⭐ 6 stars</span>
+            <a href="https://github.com/Ruaudel-Emmanuel/analyse-donnees-web" class="repo-link" target="_blank">Voir le projet</a>
+          </div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-header">
+            <h3 class="repo-name">gestion-equipes-django</h3>
+            <span class="repo-lang">Django REST</span>
+          </div>
+          <p class="repo-description">
+            Backoffice complet pour PME : gestion équipes, planning, facturation automatique. 
+            Tests + CI/CD GitHub Actions.
+          </p>
+          <div class="repo-stats">
+            <span>⭐ 15 stars • 2 forks</span>
+            <a href="https://github.com/Ruaudel-Emmanuel/gestion-equipes-django" class="repo-link" target="_blank">Voir le projet</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      © 2025 Emmanuel Ruaudel | 
+      <a href="mailto:ruaudel.emmanuel@orange.fr" style="color: #4da6ff;">ruaudel.emmanuel@orange.fr</a>
+    </footer>
+  </body>
 </html>

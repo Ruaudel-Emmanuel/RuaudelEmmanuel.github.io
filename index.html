@@ -12,22 +12,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emmanuel Ruaudel - Développeur Automatisation</title>
     <style>
-      body { font-family: Times New Roman, Times, serif; margin: 0; padding: 0 0 80px 0; background-color: #fff; color: #333; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+      body { 
+        font-family: Times New Roman, Times, serif; 
+        margin: 0; 
+        padding: 0 0 80px 0; 
+        background-color: #1a1a1a; 
+        color: #e0e0e0; 
+        line-height: 1.7; 
+        -webkit-font-smoothing: antialiased; 
+      }
       .container { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
-      header { text-align: center; padding: 3rem 0 2rem 0; }
-      header h1 { font-size: 2.8rem; margin: 0; font-weight: 700; }
-      .subtitle { font-size: 1.3rem; color: #007BFF; margin-top: 0.5rem; font-weight: 500; }
+      header { text-align: center; padding: 3rem 0 2rem 0; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); border-radius: 0 0 20px 20px; }
+      header h1 { font-size: 2.8rem; margin: 0; font-weight: 700; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+      .subtitle { font-size: 1.3rem; color: #4da6ff; margin-top: 0.5rem; font-weight: 500; }
       nav { text-align: center; margin-bottom: 2rem; }
       nav ul { list-style: none; padding: 0; display: inline-flex; gap: 1.5rem; }
       nav ul li { display: inline; }
-      nav ul li a { text-decoration: none; color: #007BFF; font-weight: 600; transition: color 0.2s; }
-      nav ul li a:hover { color: #333; text-decoration: underline; }
-      section { padding: 2rem 0; border-top: 1px solid #e9ecef; }
-      h2 { font-size: 1.8rem; font-weight: 600; text-align: center; margin-top: 0; margin-bottom: 2rem; }
-      ul { list-style: none; padding: 0; color: #555; }
+      nav ul li a { text-decoration: none; color: #4da6ff; font-weight: 600; transition: all 0.3s ease; }
+      nav ul li a:hover { color: #ffffff; text-shadow: 0 0 10px #4da6ff; }
+      section { padding: 2rem 0; border-top: 1px solid #333; }
+      h2 { font-size: 1.8rem; font-weight: 600; text-align: center; margin-top: 0; margin-bottom: 2rem; color: #ffffff; }
+      ul { list-style: none; padding: 0; color: #d0d0d0; }
       ul li { padding: 0.25rem 0; }
-      .highlight { background: #f5f8fb; border-radius: 6px; padding: 0.3rem 0.7rem; font-weight: 500; }
-      footer { text-align: center; padding: 2rem 0 1rem 0; font-size: 0.9rem; color: #999; border-top: 1px solid #e9ecef; }
+      .highlight { 
+        background: linear-gradient(135deg, #4da6ff15 0%, #4da6ff20 100%); 
+        border-radius: 6px; 
+        padding: 0.3rem 0.7rem; 
+        font-weight: 500; 
+        color: #ffffff; 
+        border: 1px solid #4da6ff30;
+      }
+      footer { 
+        text-align: center; 
+        padding: 2rem 0 1rem 0; 
+        font-size: 0.9rem; 
+        color: #999; 
+        border-top: 1px solid #333; 
+        background: #0f0f0f;
+      }
+      /* Amélioration des liens */
+      a { color: #4da6ff; transition: color 0.3s ease; }
+      a:hover { color: #ffffff; }
+      
+      /* Ombres subtiles pour profondeur */
+      .container { box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        header h1 { font-size: 2.2rem; }
+        nav ul { flex-direction: column; gap: 0.5rem; }
+      }
     </style>
     <meta name="google-site-verification" content="EirsPdyNrsprC0qX8mBM-Hi6SRI0LPtXGqqW-eUyFkI" />
   </head>
@@ -40,14 +74,14 @@
       <h1>Emmanuel Ruaudel</h1>
       <p class="subtitle">Expert Python/Django et API</p>
       <p>
-        Je transforme vos besoins en solutions techniques robustes, en m’appuyant sur 10 ans d’expérience en gestion de projets pour garantir des résultats fiables et évolutifs.
+        Je transforme vos besoins en solutions techniques robustes, en m'appuyant sur 10 ans d'expérience en gestion de projets pour garantir des résultats fiables et évolutifs.
       </p>
     </header>
     <main class="container">
       <section id="skills">
         <h2>Compétences</h2>
         <ul>
-          <li><span class="highlight">Backend & API :</span> Python, Django, Création d’API, Développement d’applications.</li>
+          <li><span class="highlight">Backend & API :</span> Python, Django, Création d'API, Développement d'applications.</li>
           <li><span class="highlight">Automatisation & Outils :</span> Automatisation de processus, IA générative, génération de pdf.</li>
           <li><span class="highlight">Gestion de Projet :</span> Analyse des besoins, Planification, Suivi qualité, Communication client.</li>
         </ul>
@@ -55,23 +89,23 @@
       <section id="projects">
         <h2>Quelques projets clients</h2>
         <ul>
-          <li><strong>Automatisation de Rapports d’Activité</strong><br>Création d’un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <em>Résultat : temps de traitement réduit de 90%.</em></li>
-          <li><strong>API REST pour une Application de Gestion</strong><br>Conception et déploiement d’une API RESTful pour gérer les opérations de gestion de données d’une PME.</li>
-          <li><strong>Outil d’Analyse de Données avec Interface Web</strong><br>Développement d’une application web Flask permettant l’upload de fichiers CSV et la visualisation d’analyses de données.</li>
+          <li><strong>Automatisation de Rapports d'Activité</strong><br>Création d'un script Python pour collecter des données via API et générer des rapports PDF hebdomadaires. <em>Résultat : temps de traitement réduit de 90%.</em></li>
+          <li><strong>API REST pour une Application de Gestion</strong><br>Conception et déploiement d'une API RESTful pour gérer les opérations de gestion de données d'une PME.</li>
+          <li><strong>Outil d'Analyse de Données avec Interface Web</strong><br>Développement d'une application web Flask permettant l'upload de fichiers CSV et la visualisation d'analyses de données.</li>
         </ul>
         <div style="margin-top:2rem;text-align:center;">
-          <a href="github.html" style="color:#007BFF;font-weight:600;">Voir tous mes projets sur GitHub &rarr;</a>
+          <a href="github.html" style="color:#4da6ff;font-weight:600;font-size:1.1rem;">Voir tous mes projets sur GitHub →</a>
         </div>
-          <nav>
-            <p><a class="nav-link" href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/">Mon Linkedln</a></li></p>
-            <p><a class="nav-link" href="https://www.malt.fr/profile/emmanuelruaudel">Mon profil Malt</a></p>
-            <p><a class="nav-link" href="https://www.upwork.com/freelancers/~0196500c283c099531">Mon profil Upwork</a></p>
-            <p><a class="nav-link" href="https://comeup.com/fr/@emmanuel-ruaudel">Mon profil ComeUp</a></p>
-          </nav>        
+        <nav style="margin-top: 2rem;">
+          <p><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" style="font-size: 1.1rem;">Mon LinkedIn</a></p>
+          <p><a href="https://www.malt.fr/profile/emmanuelruaudel" style="font-size: 1.1rem;">Mon profil Malt</a></p>
+          <p><a href="https://www.upwork.com/freelancers/~0196500c283c099531" style="font-size: 1.1rem;">Mon profil Upwork</a></p>
+          <p><a href="https://comeup.com/fr/@emmanuel-ruaudel" style="font-size: 1.1rem;">Mon profil ComeUp</a></p>
+        </nav>        
       </section>
     </main>
     <footer>
-      &copy; 2025 Emmanuel Ruaudel. Ruaudel.emmanuel@orange.fr
+      © 2025 Emmanuel Ruaudel. <a href="mailto:ruaudel.emmanuel@orange.fr">ruaudel.emmanuel@orange.fr</a>
     </footer>
   </body>
 </html>
