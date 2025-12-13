@@ -1,38 +1,290 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>Contact</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Emmanuel Ruaudel | Développeur Python Full Stack</title>
     <style>
-      form { max-width: 430px; margin: 2rem auto; padding: 2rem 2rem; background: #f9fafb; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
-      .form-group { display: flex; flex-direction: column; margin-bottom: 1.2rem; }
-      label { font-weight: 600; color: #007BFF; margin-bottom: 0.4rem; }
-      input, textarea { font-size: 1rem; padding: 0.65rem 1rem; border: 1px solid #d0d3da; border-radius: 6px; transition: border 0.2s; }
-      input:focus, textarea:focus { border-color: #007BFF; background: #f5faff; }
-      button { background: #007BFF; color: #fff; border: none; padding: 0.8rem; border-radius: 8px; font-size: 1.08rem; font-weight: 600; cursor: pointer; }
-      button:hover { background: #0056b3; }
-      .message-flash { text-align: center; font-weight: 600; margin-bottom: 1rem; }
-      .success { color: #219150; }
-      .error { color: #d82323; }
-      @media (max-width: 540px) { form { padding: 1rem 0.5rem; } }
-    </style>
-  </head>
-  <!-- Formulaire de contact Tally -->
+        :root {
+            --color-primary: #2780d8;
+            --color-primary-hover: #1e5fa0;
+            --color-bg: #0a0e27;
+            --color-surface: #12172f;
+            --color-text: #e0e6ed;
+            --color-text-secondary: #a0a8b8;
+            --color-border: #1d2543;
+            --color-success: #10b981;
+            --color-error: #ef4444;
+        }
 
-  <script>
-    var d=document,w="https://tally.so/widgets/embed.js",v=function(){
-      "undefined"!=typeof Tally ? Tally.loadEmbeds() :
-      d.querySelectorAll("iframe[data-tally-src]:not([src])")
-        .forEach(function(e){e.src=e.dataset.tallySrc})
-    };
-    if("undefined"!=typeof Tally) v();
-    else if(d.querySelector('script[src="'+w+'"]')==null){
-      var s=d.createElement("script");
-      s.src=w;
-      s.onload=v;
-      s.onerror=v;
-      d.body.appendChild(s);
-    }
-  </script>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(18, 23, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            margin-right: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 3rem 2rem;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2780d8 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-header p {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Methods */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            background: var(--color-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(39, 128, 216, 0.1);
+        }
+
+        .contact-method h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .contact-method a {
+            color: var(--color-text);
+            text-decoration: none;
+            word-break: break-all;
+            transition: color 0.3s ease;
+        }
+
+        .contact-method a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Form Container */
+        .form-container {
+            background: var(--color-surface);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            margin-bottom: 3rem;
+        }
+
+        .form-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--color-text);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(10, 14, 39, 0.5);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(39, 128, 216, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #2780d8 0%, #00d4ff 100%);
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(39, 128, 216, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Tally Embed */
+        #tally-embed {
+            margin-top: 2rem;
+            min-height: 600px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            nav a {
+                margin-right: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="Index.html">← Retour au profil</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Header -->
+        <div class="contact-header">
+            <h1>📬 Me contacter</h1>
+            <p>Vous avez un projet ? Une question ? Contactez-moi directement ou remplissez le formulaire ci-dessous.</p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container" id="formulaire">
+            <h2>Envoyez-moi un message</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">
+                Remplissez le formulaire ci-dessous et je vous répondrai dans les 24h.
+            </p>
+
+            <!-- Tally Embed Form -->
+            <iframe data-tally-src="https://tally.so/embed/WO26DL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="868" frameborder="0" marginheight="0" marginwidth="0" title="Contact Freelance - Emmanuel Ruaudel"></iframe>
+                <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+        </div>
+
+        <p style="text-align: center; color: var(--color-text-secondary); font-size: 0.9rem;">
+            ⚡ Réponse garantie dans les 24h ouvrables
+        </p>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Emmanuel Ruaudel | Développeur Python Full Stack</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="Index.html">Profil</a> • 
+            <a href="Contact.html">Contact</a> • 
+            <a href="https://github.com/Ruaudel-Emmanuel" target="_blank">GitHub</a>
+        </p>
+    </footer>
+
+    <!-- Tally Script -->
+    <script src="https://tally.so/widgets/embed.js"></script>
+
+    <script>
+        // Log when page loads
+        window.addEventListener('load', function() {
+            console.log('Contact page loaded - Tally form ready');
+        });
+    </script>
+</body>
 </html>
