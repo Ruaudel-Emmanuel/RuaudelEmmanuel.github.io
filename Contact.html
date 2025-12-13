@@ -19,52 +19,20 @@
     </style>
   </head>
   <!-- Formulaire de contact Tally -->
-<iframe
-  data-tally-src="https://tally.so/embed/WO26DL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-  loading="lazy"
-  width="100%"
-  height="868"
-  frameborder="0"
-  marginheight="0"
-  marginwidth="0"
-  title="Contact Freelance - Emmanuel Ruaudel">
-</iframe>
-<script>
-  var d=document,w="https://tally.so/widgets/embed.js",v=function(){
-    "undefined"!=typeof Tally ? Tally.loadEmbeds() :
-    d.querySelectorAll("iframe[data-tally-src]:not([src])")
-      .forEach(function(e){e.src=e.dataset.tallySrc})
-  };
-  if("undefined"!=typeof Tally) v();
-  else if(d.querySelector('script[src="'+w+'"]')==null){
-    var s=d.createElement("script");
-    s.src=w;
-    s.onload=v;
-    s.onerror=v;
-    d.body.appendChild(s);
-  }
-</script>
 
-  <body>
-    <h1 style="text-align:center;">Contactez-moi</h1>
-      
- <form action="https://ruaudelemmanuel-github-io.onrender.com/sendmessage" method="POST">
-      <div class="form-group">
-        <label for="name">Nom</label>
-        <input id="name" type="text" name="name" placeholder="Votre nom" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" placeholder="Votre email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Votre message" required></textarea>
-      </div>
-
-      <button type="submit">Envoyer</button>
-    </form>
-  </body>
+  <script>
+    var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+      "undefined"!=typeof Tally ? Tally.loadEmbeds() :
+      d.querySelectorAll("iframe[data-tally-src]:not([src])")
+        .forEach(function(e){e.src=e.dataset.tallySrc})
+    };
+    if("undefined"!=typeof Tally) v();
+    else if(d.querySelector('script[src="'+w+'"]')==null){
+      var s=d.createElement("script");
+      s.src=w;
+      s.onload=v;
+      s.onerror=v;
+      d.body.appendChild(s);
+    }
+  </script>
 </html>
