@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Devis Automatisé</title>
+    <style>
+        :root {
+            --color-primary: #208091;
+            --color-primary-hover: #1a6472;
+            --color-primary-active: #155a65;
+            --color-success: #32b8c6;
+            --color-error: #c01f2f;
+            --color-warning: #a84b2f;
+            --color-bg-primary: #fcfcf9;
+            --color-bg-secondary: #ffffff;
+            --color-text-primary: #134252;
+            --color-text-secondary: #626c7c;
+            --color-border: #e8e8e8;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --radius-base: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: var(--space-16);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: var(--space-32);
+        }
+
+        h1 {
+            margin: 0 0 var(--space-8) 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: var(--space-16);
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: var(--space-24);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: var(--space-12) 0;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 150ms ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-section h2 {
+            margin: 0 0 var(--space-24) 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-16);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-8);
+            color: var(--color-text-primary);
+        }
+
+        input, select, textarea {
+            padding: var(--space-8) var(--space-12);
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(32, 128, 145, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 150ms ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            margin-left: var(--space-8);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .btn-sm {
+            padding: var(--space-4) var(--space-12);
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: var(--color-error);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #a81b28;
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #2a9dac;
+        }
+
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .provider-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .provider-card h3 {
+            margin: 0 0 var(--space-8) 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .provider-card p {
+            margin: var(--space-8) 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .provider-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: var(--space-16) 0;
+        }
+
+        .quote-builder {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quote-items {
+            margin-bottom: var(--space-24);
+        }
+
+        .quote-item {
+            background: var(--color-bg-primary);
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-12);
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: var(--space-16);
+            align-items: center;
+        }
+
+        .quote-item-info h4 {
+            margin: 0 0 var(--space-4) 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .quote-item-info p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .quote-summary {
+            border-top: 2px solid var(--color-border);
+            padding-top: var(--space-24);
+            margin-top: var(--space-24);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-12) 0;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-primary);
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--space-16);
+        }
+
+        .quote-item-actions {
+            display: flex;
+            gap: var(--space-8);
+        }
+
+        .quote-item-delete {
+            background: var(--color-error);
+            color: #fff;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .quote-item-delete:hover {
+            background: #a81b28;
+        }
+
+        .quote-item-qty {
+            width: 60px;
+            padding: var(--space-8);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .quote-preview {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-md);
+        }
+
+        .quote-header {
+            text-align: center;
+            margin-bottom: var(--space-32);
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: var(--space-24);
+        }
+
+        .quote-header h2 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--color-primary);
+        }
+
+        .quote-customer {
+            margin-bottom: var(--space-24);
+        }
+
+        .quote-customer p {
+            margin: var(--space-4) 0;
+            font-size: 13px;
+        }
+
+        .quote-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--space-24);
+        }
+
+        .quote-table th {
+            background: var(--color-bg-primary);
+            padding: var(--space-12);
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .quote-table td {
+            padding: var(--space-12);
+            border-bottom: 1px solid var(--color-border);
+            font-size: 13px;
+        }
+
+        .quote-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .quote-totals {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-32);
+            margin-bottom: var(--space-24);
+        }
+
+        .total-item {
+            text-align: right;
+        }
+
+        .total-item-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .total-item-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .quote-footer {
+            text-align: center;
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--space-16);
+        }
+
+        @media (max-width: 768px) {
+            .providers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-item {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-totals {
+                flex-direction: column;
+                gap: var(--space-8);
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .tabs, .form-section, .btn, .quote-builder {
+                display: none;
+            }
+
+            .quote-preview {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Générateur de Devis Automatisé</h1>
+            <p class="subtitle">Créez des devis instantanés avec tarifs pré-configurés</p>
+        </header>
+
+        <!-- Tabs de navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('create-quote')">📝 Créer un Devis</button>
+            <button class="tab-btn" onclick="switchTab('providers')">🏪 Gérer Prestataires</button>
+        </div>
+
+        <!-- Tab 1: Créer un devis -->
+        <div id="create-quote" class="tab-content active">
+            <div class="form-section">
+                <h2>Informations Client</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Nom du client</label>
+                        <input type="text" id="clientName" placeholder="SARL Jardins & Paysage">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Email</label>
+                        <input type="email" id="clientEmail" placeholder="contact@example.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientPhone">Téléphone</label>
+                        <input type="tel" id="clientPhone" placeholder="+33 6 12 34 56 78">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectTitle">Titre du projet</label>
+                        <input type="text" id="projectTitle" placeholder="Ex: Dallage terrasse 50 m²">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="quoteDate">Date du devis</label>
+                        <input type="date" id="quoteDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="validity">Validité (jours)</label>
+                        <input type="number" id="validity" value="30" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-builder">
+                <h2>Ajouter des prestations</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="selectProvider">Sélectionner un prestataire</label>
+                        <select id="selectProvider" onchange="loadProviderServices()">
+                            <option value="">-- Choisir un prestataire --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectService">Type de prestation</label>
+                        <select id="selectService">
+                            <option value="">-- D'abord, choisir un prestataire --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="quantity">Quantité/Surface</label>
+                        <input type="number" id="quantity" placeholder="5" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="unit">Unité</label>
+                        <select id="unit">
+                            <option value="m²">m²</option>
+                            <option value="m">m</option>
+                            <option value="h">h (heures)</option>
+                            <option value="unit">unité</option>
+                            <option value="jour">jour</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addToQuote()">Ajouter à la devis</button>
+            </div>
+
+            <div class="quote-builder">
+                <h2>Devis en cours</h2>
+                <div id="quoteItems" class="quote-items"></div>
+                
+                <div class="quote-summary">
+                    <div class="summary-row">
+                        <span>Sous-total</span>
+                        <span id="subtotal">0.00 €</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>TVA (20%)</span>
+                        <span id="tva">0.00 €</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>TOTAL TTC</span>
+                        <span id="totalttc">0.00 €</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--space-24); display: flex; gap: var(--space-8);">
+                    <button class="btn btn-success" onclick="generateQuote()">✅ Générer le PDF</button>
+                    <button class="btn btn-secondary" onclick="resetQuote()">🔄 Réinitialiser</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Gérer les prestataires -->
+        <div id="providers" class="tab-content">
+            <div class="form-section">
+                <h2>Ajouter un prestataire</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="providerName">Nom du prestataire</label>
+                        <input type="text" id="providerName" placeholder="Ex: Pierre & Graviers SARL">
+                    </div>
+                    <div class="form-group">
+                        <label for="providerType">Type</label>
+                        <select id="providerType">
+                            <option value="material">🏗️ Fournisseur matériau</option>
+                            <option value="subcontractor">🔧 Sous-traitant</option>
+                            <option value="equipment">🚚 Équipement/Location</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="providerContact">Contact</label>
+                        <input type="tel" id="providerContact" placeholder="+33 6 12 34 56 78">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addProvider()">Ajouter le prestataire</button>
+            </div>
+
+            <h2 style="margin-top: var(--space-32);">Services & Tarifs</h2>
+            <div id="providersList"></div>
+        </div>
+
+        <!-- Aperçu du devis (caché par défaut) -->
+        <div id="quotePreviewSection" style="display: none; margin-top: var(--space-32);">
+            <div class="quote-preview" id="quotePreview"></div>
+            <div style="margin-top: var(--space-24); text-align: center;">
+                <button class="btn btn-success" onclick="printQuote()">🖨️ Imprimer</button>
+                <button class="btn btn-secondary" onclick="downloadQuotePDF()">📥 Télécharger PDF</button>
+                <button class="btn btn-secondary" onclick="closeQuotePreview()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let providers = JSON.parse(localStorage.getItem('providers')) || [];
+        let quoteItems = [];
+
+        // Pré-charger des prestataires d'exemple
+        if (providers.length === 0) {
+            providers = [
+                {
+                    id: 1,
+                    name: 'Pierre & Graviers SARL',
+                    type: 'material',
+                    contact: '+33 4 92 12 34 56',
+                    services: [
+                        { id: 1, name: 'Dallage pierre naturelle', unit: 'm²', price: 95 },
+                        { id: 2, name: 'Gravier décoratif', unit: 'm²', price: 35 },
+                        { id: 3, name: 'Pavé béton', unit: 'm²', price: 55 }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: 'Équipe Maçonnerie Dubois',
+                    type: 'subcontractor',
+                    contact: '+33 6 45 67 89 01',
+                    services: [
+                        { id: 4, name: 'Préparation terrain', unit: 'm²', price: 25 },
+                        { id: 5, name: 'Pose dallage', unit: 'm²', price: 60 },
+                        { id: 6, name: 'Main d\'œuvre générale', unit: 'h', price: 55 }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: 'Location Matériel BTP',
+                    type: 'equipment',
+                    contact: '+33 4 92 45 67 89',
+                    services: [
+                        { id: 7, name: 'Location pelleteuse', unit: 'jour', price: 180 },
+                        { id: 8, name: 'Location compacteur', unit: 'jour', price: 95 },
+                        { id: 9, name: 'Location camion', unit: 'jour', price: 120 }
+                    ]
+                }
+            ];
+            saveProviders();
+        }
+
+        // Initialiser les dates
+        document.getElementById('quoteDate').valueAsDate = new Date();
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabName === 'providers') {
+                renderProviders();
+            }
+        }
+
+        function loadProviderServices() {
+            const providerId = parseInt(document.getElementById('selectProvider').value);
+            const provider = providers.find(p => p.id === providerId);
+            const serviceSelect = document.getElementById('selectService');
+
+            serviceSelect.innerHTML = '<option value="">-- Choisir une prestation --</option>';
+            
+            if (provider) {
+                provider.services.forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service.id;
+                    option.textContent = `${service.name} (${service.price.toFixed(2)} €/${service.unit})`;
+                    option.dataset.price = service.price;
+                    option.dataset.unit = service.unit;
+                    serviceSelect.appendChild(option);
+                });
+            }
+        }
+
+        function addToQuote() {
+            const providerId = parseInt(document.getElementById('selectProvider').value);
+            const serviceId = parseInt(document.getElementById('selectService').value);
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            const unit = document.getElementById('unit').value;
+
+            if (!providerId || !serviceId || !quantity || quantity <= 0) {
+                alert('Veuillez remplir tous les champs correctement');
+                return;
+            }
+
+            const provider = providers.find(p => p.id === providerId);
+            const service = provider.services.find(s => s.id === serviceId);
+
+            const item = {
+                id: Date.now(),
+                provider: provider.name,
+                service: service.name,
+                quantity: quantity,
+                unit: unit,
+                unitPrice: service.price,
+                total: quantity * service.price
+            };
+
+            quoteItems.push(item);
+            document.getElementById('selectService').value = '';
+            document.getElementById('quantity').value = '';
+            updateQuoteDisplay();
+            alert('Prestation ajoutée au devis !');
+        }
+
+        function removeQuoteItem(itemId) {
+            quoteItems = quoteItems.filter(item => item.id !== itemId);
+            updateQuoteDisplay();
+        }
+
+        function updateQuoteDisplay() {
+            const container = document.getElementById('quoteItems');
+            container.innerHTML = '';
+
+            if (quoteItems.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>Aucune prestation ajoutée. Commencez par en ajouter une !</p></div>';
+            } else {
+                quoteItems.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'quote-item';
+                    div.innerHTML = `
+                        <div class="quote-item-info">
+                            <h4>${item.service}</h4>
+                            <p>${item.provider}</p>
+                        </div>
+                        <input type="number" class="quote-item-qty" value="${item.quantity}" 
+                            onchange="updateItemQuantity(${item.id}, this.value)" min="0.01" step="0.01">
+                        <span style="font-weight: 600;">${item.unitPrice.toFixed(2)} €/${item.unit}</span>
+                        <div class="quote-item-actions">
+                            <span style="font-weight: 600; color: var(--color-primary);">${item.total.toFixed(2)} €</span>
+                            <button class="quote-item-delete" onclick="removeQuoteItem(${item.id})">✕</button>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            calculateTotals();
+        }
+
+        function updateItemQuantity(itemId, newQuantity) {
+            const item = quoteItems.find(i => i.id === itemId);
+            if (item) {
+                item.quantity = parseFloat(newQuantity);
+                item.total = item.quantity * item.unitPrice;
+                updateQuoteDisplay();
+            }
+        }
+
+        function calculateTotals() {
+            const subtotal = quoteItems.reduce((sum, item) => sum + item.total, 0);
+            const tva = subtotal * 0.20;
+            const totalttc = subtotal + tva;
+
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' €';
+            document.getElementById('tva').textContent = tva.toFixed(2) + ' €';
+            document.getElementById('totalttc').textContent = totalttc.toFixed(2) + ' €';
+        }
+
+        function resetQuote() {
+            if (!confirm('Êtes-vous sûr de vouloir réinitialiser le devis ?')) return;
+            quoteItems = [];
+            document.getElementById('clientName').value = '';
+            document.getElementById('clientEmail').value = '';
+            document.getElementById('clientPhone').value = '';
+            document.getElementById('projectTitle').value = '';
+            document.getElementById('selectProvider').value = '';
+            document.getElementById('selectService').innerHTML = '<option value="">-- D\'abord, choisir un prestataire --</option>';
+            document.getElementById('quantity').value = '';
+            updateQuoteDisplay();
+        }
+
+        function generateQuote() {
+            const clientName = document.getElementById('clientName').value.trim();
+            const projectTitle = document.getElementById('projectTitle').value.trim();
+
+            if (!clientName || !projectTitle || quoteItems.length === 0) {
+                alert('Veuillez remplir les infos client et ajouter au moins une prestation');
+                return;
+            }
+
+            const subtotal = quoteItems.reduce((sum, item) => sum + item.total, 0);
+            const tva = subtotal * 0.20;
+            const totalttc = subtotal + tva;
+
+            const validityDate = new Date(document.getElementById('quoteDate').valueAsDate);
+            validityDate.setDate(validityDate.getDate() + parseInt(document.getElementById('validity').value));
+
+            let html = `
+                <div class="quote-header">
+                    <h2>DEVIS</h2>
+                    <p style="color: var(--color-text-secondary);">Valable jusqu'au ${validityDate.toLocaleDateString('fr-FR')}</p>
+                </div>
+
+                <div class="quote-customer">
+                    <p><strong>Client :</strong> ${clientName}</p>
+                    ${document.getElementById('clientEmail').value ? `<p><strong>Email :</strong> ${document.getElementById('clientEmail').value}</p>` : ''}
+                    ${document.getElementById('clientPhone').value ? `<p><strong>Téléphone :</strong> ${document.getElementById('clientPhone').value}</p>` : ''}
+                </div>
+
+                <div style="margin-bottom: var(--space-24);">
+                    <p><strong>Objet :</strong> ${projectTitle}</p>
+                    <p><strong>Date :</strong> ${document.getElementById('quoteDate').value}</p>
+                </div>
+
+                <table class="quote-table">
+                    <thead>
+                        <tr>
+                            <th>Prestation</th>
+                            <th>Prestataire</th>
+                            <th>Quantité</th>
+                            <th>P.U.</th>
+                            <th style="text-align: right;">Total HT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${quoteItems.map(item => `
+                            <tr>
+                                <td>${item.service}</td>
+                                <td>${item.provider}</td>
+                                <td>${item.quantity} ${item.unit}</td>
+                                <td>${item.unitPrice.toFixed(2)} €</td>
+                                <td style="text-align: right;">${item.total.toFixed(2)} €</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+
+                <div class="quote-totals">
+                    <div>
+                        <div class="total-item">
+                            <div class="total-item-label">Sous-total HT</div>
+                            <div class="total-item-value">${subtotal.toFixed(2)} €</div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-item-label">TVA 20%</div>
+                            <div class="total-item-value">${tva.toFixed(2)} €</div>
+                        </div>
+                        <div class="total-item">
+                            <div class="total-item-label">TOTAL TTC</div>
+                            <div class="total-item-value" style="font-size: 24px; color: var(--color-success);">${totalttc.toFixed(2)} €</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote-footer">
+                    <p>Ce devis est valable jusqu'au ${validityDate.toLocaleDateString('fr-FR')}</p>
+                    <p>Acceptation par signature ou mail de confirmation</p>
+                </div>
+            `;
+
+            document.getElementById('quotePreview').innerHTML = html;
+            document.getElementById('quotePreviewSection').style.display = 'block';
+        }
+
+        function printQuote() {
+            window.print();
+        }
+
+        function downloadQuotePDF() {
+            alert('Fonctionnalité PDF disponible avec intégration serveur Django (pdfkit, reportlab)');
+        }
+
+        function closeQuotePreview() {
+            document.getElementById('quotePreviewSection').style.display = 'none';
+        }
+
+        function addProvider() {
+            const name = document.getElementById('providerName').value.trim();
+            const type = document.getElementById('providerType').value;
+            const contact = document.getElementById('providerContact').value.trim();
+
+            if (!name) {
+                alert('Veuillez entrer un nom de prestataire');
+                return;
+            }
+
+            const provider = {
+                id: Math.max(...providers.map(p => p.id), 0) + 1,
+                name: name,
+                type: type,
+                contact: contact,
+                services: []
+            };
+
+            providers.push(provider);
+            saveProviders();
+            document.getElementById('providerName').value = '';
+            document.getElementById('providerContact').value = '';
+            updateProviderSelects();
+            renderProviders();
+            alert('Prestataire ajouté !');
+        }
+
+        function deleteProvider(providerId) {
+            if (!confirm('Êtes-vous sûr ? Cela supprimera aussi ses services')) return;
+            providers = providers.filter(p => p.id !== providerId);
+            saveProviders();
+            updateProviderSelects();
+            renderProviders();
+        }
+
+        function addService(providerId) {
+            const name = prompt('Nom de la prestation');
+            if (!name) return;
+
+            const unit = prompt('Unité (m², h, jour, etc)');
+            if (!unit) return;
+
+            const price = prompt('Prix unitaire (€)');
+            if (!price || isNaN(price)) return;
+
+            const provider = providers.find(p => p.id === providerId);
+            if (provider) {
+                provider.services.push({
+                    id: Math.max(...provider.services.map(s => s.id), 0) + 1,
+                    name: name,
+                    unit: unit,
+                    price: parseFloat(price)
+                });
+                saveProviders();
+                renderProviders();
+            }
+        }
+
+        function deleteService(providerId, serviceId) {
+            const provider = providers.find(p => p.id === providerId);
+            if (provider) {
+                provider.services = provider.services.filter(s => s.id !== serviceId);
+                saveProviders();
+                renderProviders();
+            }
+        }
+
+        function renderProviders() {
+            const container = document.getElementById('providersList');
+            container.innerHTML = '';
+
+            providers.forEach(provider => {
+                const div = document.createElement('div');
+                div.className = 'form-section';
+                
+                const typeLabel = {
+                    'material': '🏗️ Fournisseur matériau',
+                    'subcontractor': '🔧 Sous-traitant',
+                    'equipment': '🚚 Équipement'
+                }[provider.type] || provider.type;
+
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-24);">
+                        <div>
+                            <h3 style="margin: 0 0 var(--space-4) 0;">${provider.name}</h3>
+                            <p style="margin: 0; color: var(--color-text-secondary); font-size: 13px;">
+                                ${typeLabel} • ${provider.contact || 'Pas de contact'}
+                            </p>
+                        </div>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProvider(${provider.id})">Supprimer</button>
+                    </div>
+
+                    <h4 style="margin: var(--space-16) 0 var(--space-12) 0;">Prestations</h4>
+                    ${provider.services.length === 0 ? 
+                        '<p style="color: var(--color-text-secondary); font-size: 13px;">Aucun service ajouté</p>' :
+                        `<ul style="margin: 0; padding: 0; list-style: none;">
+                            ${provider.services.map(service => `
+                                <li style="padding: var(--space-8) 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+                                    <span><strong>${service.name}</strong> (${service.price.toFixed(2)} €/${service.unit})</span>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteService(${provider.id}, ${service.id})">✕</button>
+                                </li>
+                            `).join('')}
+                        </ul>`
+                    }
+
+                    <button class="btn btn-primary btn-sm" style="margin-top: var(--space-16);" onclick="addService(${provider.id})">+ Ajouter un service</button>
+                `;
+
+                container.appendChild(div);
+            });
+        }
+
+        function updateProviderSelects() {
+            const select = document.getElementById('selectProvider');
+            select.innerHTML = '<option value="">-- Choisir un prestataire --</option>';
+            providers.forEach(provider => {
+                const option = document.createElement('option');
+                option.value = provider.id;
+                option.textContent = provider.name;
+                select.appendChild(option);
+            });
+        }
+
+        function saveProviders() {
+            localStorage.setItem('providers', JSON.stringify(providers));
+        }
+
+        // Initialisation au chargement
+        updateProviderSelects();
+        updateQuoteDisplay();
+    </script>
+</body>
+</html>

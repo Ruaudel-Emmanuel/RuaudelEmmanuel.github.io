@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi d'Interventions avec Photos</title>
+    <style>
+        :root {
+            --color-primary: #208091;
+            --color-primary-hover: #1a6472;
+            --color-primary-active: #155a65;
+            --color-success: #32b8c6;
+            --color-error: #c01f2f;
+            --color-warning: #a84b2f;
+            --color-bg-primary: #fcfcf9;
+            --color-bg-secondary: #ffffff;
+            --color-text-primary: #134252;
+            --color-text-secondary: #626c7c;
+            --color-border: #e8e8e8;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --radius-base: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: var(--space-16);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: var(--space-32);
+        }
+
+        h1 {
+            margin: 0 0 var(--space-8) 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: var(--space-16);
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: var(--space-24);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: var(--space-12) 0;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 150ms ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-section h2 {
+            margin: 0 0 var(--space-24) 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-16);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-8);
+            color: var(--color-text-primary);
+        }
+
+        input, select, textarea {
+            padding: var(--space-8) var(--space-12);
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(32, 128, 145, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 150ms ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            margin-left: var(--space-8);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .btn-sm {
+            padding: var(--space-4) var(--space-12);
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: var(--color-error);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #a81b28;
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #2a9dac;
+        }
+
+        .photo-upload {
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            text-align: center;
+            cursor: pointer;
+            transition: all 150ms ease;
+            background: var(--color-bg-primary);
+        }
+
+        .photo-upload:hover {
+            border-color: var(--color-primary);
+            background: rgba(32, 128, 145, 0.05);
+        }
+
+        .photo-upload input {
+            display: none;
+        }
+
+        .photo-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--space-12);
+            margin-top: var(--space-16);
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: var(--radius-base);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+            aspect-ratio: 1;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-item-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: var(--space-8);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .photo-item-delete {
+            position: absolute;
+            top: var(--space-8);
+            right: var(--space-8);
+            background: var(--color-error);
+            color: #fff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-item-delete:hover {
+            background: #a81b28;
+        }
+
+        .interventions-list {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .intervention-card {
+            padding: var(--space-24);
+            border-bottom: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: background 150ms ease;
+        }
+
+        .intervention-card:last-child {
+            border-bottom: none;
+        }
+
+        .intervention-card:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .intervention-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-12);
+        }
+
+        .intervention-title h3 {
+            margin: 0 0 var(--space-4) 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .intervention-title p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: var(--space-4) var(--space-12);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-in-progress {
+            background: rgba(168, 75, 47, 0.15);
+            color: var(--color-warning);
+        }
+
+        .status-completed {
+            background: rgba(50, 184, 198, 0.15);
+            color: var(--color-success);
+        }
+
+        .status-problem {
+            background: rgba(192, 31, 47, 0.15);
+            color: var(--color-error);
+        }
+
+        .intervention-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-12);
+            font-size: 13px;
+        }
+
+        .meta-item {
+            color: var(--color-text-secondary);
+        }
+
+        .meta-item strong {
+            color: var(--color-text-primary);
+            display: block;
+            font-size: 13px;
+        }
+
+        .intervention-notes {
+            background: var(--color-bg-primary);
+            padding: var(--space-12);
+            border-radius: 4px;
+            margin: var(--space-12) 0 0 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .intervention-photos {
+            display: flex;
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+            flex-wrap: wrap;
+        }
+
+        .intervention-photo-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+        }
+
+        .intervention-photo-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .details-panel {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-md);
+        }
+
+        .details-panel h2 {
+            margin: 0 0 var(--space-24) 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 14px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .photo-gallery {
+            margin: var(--space-24) 0;
+        }
+
+        .photo-gallery h3 {
+            margin: 0 0 var(--space-12) 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-12);
+        }
+
+        .gallery-item {
+            border-radius: var(--radius-base);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            aspect-ratio: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-label {
+            padding: var(--space-8);
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--color-bg-primary);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: var(--space-16);
+            margin-bottom: var(--space-24);
+            flex-wrap: wrap;
+        }
+
+        .filter-row select {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .intervention-meta {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .photo-preview {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Suivi d'Interventions avec Photos</h1>
+            <p class="subtitle">Enregistrez vos interventions terrain avec traçabilité et photos avant/après</p>
+        </header>
+
+        <!-- Tabs de navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('new-intervention')">➕ Nouvelle Intervention</button>
+            <button class="tab-btn" onclick="switchTab('list-interventions')">📋 Tous les Interventions</button>
+        </div>
+
+        <!-- Tab 1: Nouvelle intervention -->
+        <div id="new-intervention" class="tab-content active">
+            <div class="form-section">
+                <h2>Enregistrer une nouvelle intervention</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="siteName">Site / Chantier</label>
+                        <input type="text" id="siteName" placeholder="Ex: Terrasse - Client Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label for="workType">Type d'intervention</label>
+                        <select id="workType">
+                            <option value="">-- Sélectionner --</option>
+                            <option value="preparation">Préparation terrain</option>
+                            <option value="installation">Installation/Pose</option>
+                            <option value="maintenance">Maintenance/Retouche</option>
+                            <option value="sav">SAV/Réparation</option>
+                            <option value="inspection">Inspection</option>
+                            <option value="cleanup">Nettoyage</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="interventionDate">Date</label>
+                        <input type="date" id="interventionDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime">Heure de début</label>
+                        <input type="time" id="startTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime">Heure de fin</label>
+                        <input type="time" id="endTime">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="teamMember">Responsable / Équipe</label>
+                        <input type="text" id="teamMember" placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Statut</label>
+                        <select id="status">
+                            <option value="completed">✅ Terminée</option>
+                            <option value="in-progress">⏳ En cours</option>
+                            <option value="problem">❌ Problème détecté</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="notes">Notes / Observations</label>
+                        <textarea id="notes" placeholder="Détails, remarques, problèmes rencontrés..." rows="4"></textarea>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: var(--space-24); margin-bottom: var(--space-16);">📷 Ajouter des photos</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Photos avant intervention</label>
+                        <div class="photo-upload" onclick="triggerPhotoUpload('before')">
+                            📸 Cliquez ou déposez les photos avant
+                            <input type="file" id="photoBefore" multiple accept="image/*" onchange="handlePhotoUpload('before')">
+                        </div>
+                        <div class="photo-preview" id="previewBefore"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Photos après intervention</label>
+                        <div class="photo-upload" onclick="triggerPhotoUpload('after')">
+                            📸 Cliquez ou déposez les photos après
+                            <input type="file" id="photoAfter" multiple accept="image/*" onchange="handlePhotoUpload('after')">
+                        </div>
+                        <div class="photo-preview" id="previewAfter"></div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" style="margin-top: var(--space-24);" onclick="saveIntervention()">Enregistrer l'intervention</button>
+                <button class="btn btn-secondary" onclick="resetForm()">Annuler</button>
+            </div>
+        </div>
+
+        <!-- Tab 2: Liste des interventions -->
+        <div id="list-interventions" class="tab-content">
+            <div class="form-section">
+                <h2>Filtrer les interventions</h2>
+                <div class="filter-row">
+                    <select id="filterStatus" onchange="renderInterventions()">
+                        <option value="">Tous les statuts</option>
+                        <option value="completed">✅ Terminées</option>
+                        <option value="in-progress">⏳ En cours</option>
+                        <option value="problem">❌ Problèmes</option>
+                    </select>
+                    <select id="filterMonth" onchange="renderInterventions()">
+                        <option value="">Tous les mois</option>
+                        <option value="0">Janvier</option>
+                        <option value="1">Février</option>
+                        <option value="2">Mars</option>
+                        <option value="3">Avril</option>
+                        <option value="4">Mai</option>
+                        <option value="5">Juin</option>
+                        <option value="6">Juillet</option>
+                        <option value="7">Août</option>
+                        <option value="8">Septembre</option>
+                        <option value="9">Octobre</option>
+                        <option value="10">Novembre</option>
+                        <option value="11">Décembre</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="interventionsList" class="interventions-list"></div>
+            <div id="emptyList" class="empty-state">
+                <p>Aucune intervention enregistrée. Commencez par en ajouter une !</p>
+            </div>
+        </div>
+
+        <!-- Détails d'une intervention (caché) -->
+        <div id="detailsSection" style="display: none; margin-top: var(--space-32);">
+            <div class="details-panel">
+                <h2 id="detailsTitle">Détails de l'intervention</h2>
+
+                <div class="detail-row">
+                    <span class="detail-label">Site / Chantier</span>
+                    <span class="detail-value" id="detailSite">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Type d'intervention</span>
+                    <span class="detail-value" id="detailType">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date</span>
+                    <span class="detail-value" id="detailDate">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Horaires</span>
+                    <span class="detail-value" id="detailTime">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Responsable</span>
+                    <span class="detail-value" id="detailTeam">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Statut</span>
+                    <span class="detail-value" id="detailStatus">-</span>
+                </div>
+
+                <div style="margin-top: var(--space-24); padding-top: var(--space-24); border-top: 2px solid var(--color-border);">
+                    <h3 style="margin: 0 0 var(--space-12) 0;">📝 Notes</h3>
+                    <div style="background: var(--color-bg-primary); padding: var(--space-16); border-radius: var(--radius-base); font-size: 14px;">
+                        <p id="detailNotes" style="margin: 0;">-</p>
+                    </div>
+                </div>
+
+                <div class="photo-gallery" id="photoGallery"></div>
+
+                <div style="margin-top: var(--space-24); display: flex; gap: var(--space-8);">
+                    <button class="btn btn-secondary" onclick="closeDetails()">Fermer</button>
+                    <button class="btn btn-danger" onclick="deleteIntervention(selectedIntervention)">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let interventions = JSON.parse(localStorage.getItem('interventions')) || [];
+        let photosBeforeData = [];
+        let photosAfterData = [];
+        let selectedIntervention = null;
+
+        // Initialiser la date
+        document.getElementById('interventionDate').valueAsDate = new Date();
+        document.getElementById('startTime').value = '08:00';
+        document.getElementById('endTime').value = '17:00';
+
+        function triggerPhotoUpload(type) {
+            if (type === 'before') {
+                document.getElementById('photoBefore').click();
+            } else {
+                document.getElementById('photoAfter').click();
+            }
+        }
+
+        function handlePhotoUpload(type) {
+            const fileInput = type === 'before' ? document.getElementById('photoBefore') : document.getElementById('photoAfter');
+            const previewContainer = type === 'before' ? document.getElementById('previewBefore') : document.getElementById('previewAfter');
+            const photoData = type === 'before' ? photosBeforeData : photosAfterData;
+
+            const files = Array.from(fileInput.files);
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const photoObj = {
+                        id: Date.now() + Math.random(),
+                        data: e.target.result,
+                        type: type
+                    };
+                    photoData.push(photoObj);
+                    renderPhotoPreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderPhotoPreviews() {
+            const previewBefore = document.getElementById('previewBefore');
+            const previewAfter = document.getElementById('previewAfter');
+
+            previewBefore.innerHTML = '';
+            previewAfter.innerHTML = '';
+
+            photosBeforeData.forEach(photo => {
+                const div = document.createElement('div');
+                div.className = 'photo-item';
+                div.innerHTML = `
+                    <img src="${photo.data}" alt="Avant">
+                    <div class="photo-item-label">Avant</div>
+                    <button class="photo-item-delete" onclick="deletePhoto('before', ${photo.id})">×</button>
+                `;
+                previewBefore.appendChild(div);
+            });
+
+            photosAfterData.forEach(photo => {
+                const div = document.createElement('div');
+                div.className = 'photo-item';
+                div.innerHTML = `
+                    <img src="${photo.data}" alt="Après">
+                    <div class="photo-item-label">Après</div>
+                    <button class="photo-item-delete" onclick="deletePhoto('after', ${photo.id})">×</button>
+                `;
+                previewAfter.appendChild(div);
+            });
+        }
+
+        function deletePhoto(type, photoId) {
+            if (type === 'before') {
+                photosBeforeData = photosBeforeData.filter(p => p.id !== photoId);
+            } else {
+                photosAfterData = photosAfterData.filter(p => p.id !== photoId);
+            }
+            renderPhotoPreviews();
+        }
+
+        function saveIntervention() {
+            const site = document.getElementById('siteName').value.trim();
+            const workType = document.getElementById('workType').value;
+            const date = document.getElementById('interventionDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const team = document.getElementById('teamMember').value.trim();
+            const status = document.getElementById('status').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!site || !workType || !date || !startTime || !endTime || !team) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+
+            const intervention = {
+                id: Date.now(),
+                site: site,
+                workType: workType,
+                date: date,
+                startTime: startTime,
+                endTime: endTime,
+                team: team,
+                status: status,
+                notes: notes,
+                photosBefore: photosBeforeData.map(p => ({ id: p.id, data: p.data })),
+                photosAfter: photosAfterData.map(p => ({ id: p.id, data: p.data })),
+                createdAt: new Date().toISOString()
+            };
+
+            interventions.push(intervention);
+            saveData();
+            resetForm();
+            alert('Intervention enregistrée avec succès !');
+            switchTab('list-interventions');
+            setTimeout(() => renderInterventions(), 300);
+        }
+
+        function deleteIntervention(interventionId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette intervention ?')) return;
+            interventions = interventions.filter(i => i.id !== interventionId);
+            saveData();
+            closeDetails();
+            renderInterventions();
+        }
+
+        function showDetails(interventionId) {
+            selectedIntervention = interventionId;
+            const intervention = interventions.find(i => i.id === interventionId);
+            if (!intervention) return;
+
+            const typeLabels = {
+                'preparation': 'Préparation terrain',
+                'installation': 'Installation/Pose',
+                'maintenance': 'Maintenance/Retouche',
+                'sav': 'SAV/Réparation',
+                'inspection': 'Inspection',
+                'cleanup': 'Nettoyage'
+            };
+
+            const statusLabels = {
+                'completed': '✅ Terminée',
+                'in-progress': '⏳ En cours',
+                'problem': '❌ Problème'
+            };
+
+            document.getElementById('detailsTitle').textContent = 'Intervention : ' + intervention.site;
+            document.getElementById('detailSite').textContent = intervention.site;
+            document.getElementById('detailType').textContent = typeLabels[intervention.workType] || intervention.workType;
+            document.getElementById('detailDate').textContent = intervention.date;
+            document.getElementById('detailTime').textContent = `${intervention.startTime} - ${intervention.endTime}`;
+            document.getElementById('detailTeam').textContent = intervention.team;
+            document.getElementById('detailStatus').textContent = statusLabels[intervention.status] || intervention.status;
+            document.getElementById('detailNotes').textContent = intervention.notes || '(Aucune note)';
+
+            // Galerie photos
+            const gallery = document.getElementById('photoGallery');
+            gallery.innerHTML = '';
+
+            const allPhotos = [
+                ...intervention.photosBefore.map(p => ({ ...p, label: 'Avant' })),
+                ...intervention.photosAfter.map(p => ({ ...p, label: 'Après' }))
+            ];
+
+            if (allPhotos.length > 0) {
+                gallery.innerHTML = '<h3>📷 Photos</h3>';
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'gallery-grid';
+
+                allPhotos.forEach(photo => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `
+                        <img src="${photo.data}" alt="${photo.label}">
+                        <div class="gallery-label">${photo.label}</div>
+                    `;
+                    gridDiv.appendChild(item);
+                });
+
+                gallery.appendChild(gridDiv);
+            }
+
+            document.getElementById('detailsSection').style.display = 'block';
+        }
+
+        function closeDetails() {
+            document.getElementById('detailsSection').style.display = 'none';
+            selectedIntervention = null;
+        }
+
+        function renderInterventions() {
+            const list = document.getElementById('interventionsList');
+            const empty = document.getElementById('emptyList');
+            list.innerHTML = '';
+
+            const filterStatus = document.getElementById('filterStatus').value;
+            const filterMonth = document.getElementById('filterMonth').value;
+
+            let filtered = interventions;
+
+            if (filterStatus) {
+                filtered = filtered.filter(i => i.status === filterStatus);
+            }
+
+            if (filterMonth !== '') {
+                filtered = filtered.filter(i => {
+                    const date = new Date(i.date);
+                    return date.getMonth() === parseInt(filterMonth);
+                });
+            }
+
+            if (filtered.length === 0) {
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(intervention => {
+                const statusClass = `status-${intervention.status}`;
+                const statusLabel = {
+                    'completed': '✅ Terminée',
+                    'in-progress': '⏳ En cours',
+                    'problem': '❌ Problème'
+                }[intervention.status];
+
+                const typeLabel = {
+                    'preparation': 'Préparation',
+                    'installation': 'Installation',
+                    'maintenance': 'Maintenance',
+                    'sav': 'SAV',
+                    'inspection': 'Inspection',
+                    'cleanup': 'Nettoyage'
+                }[intervention.workType] || intervention.workType;
+
+                const card = document.createElement('div');
+                card.className = 'intervention-card';
+                card.onclick = () => showDetails(intervention.id);
+
+                card.innerHTML = `
+                    <div class="intervention-header">
+                        <div class="intervention-title">
+                            <h3>${intervention.site}</h3>
+                            <p>${typeLabel}</p>
+                        </div>
+                        <span class="status-badge ${statusClass}">${statusLabel}</span>
+                    </div>
+                    
+                    <div class="intervention-meta">
+                        <div class="meta-item">
+                            <strong>📅 Date</strong>
+                            ${intervention.date}
+                        </div>
+                        <div class="meta-item">
+                            <strong>⏱️ Durée</strong>
+                            ${intervention.startTime} - ${intervention.endTime}
+                        </div>
+                        <div class="meta-item">
+                            <strong>👤 Responsable</strong>
+                            ${intervention.team}
+                        </div>
+                        <div class="meta-item">
+                            <strong>📸 Photos</strong>
+                            ${intervention.photosBefore.length + intervention.photosAfter.length} photo(s)
+                        </div>
+                    </div>
+
+                    ${intervention.notes ? `<div class="intervention-notes">📝 ${intervention.notes.substring(0, 100)}${intervention.notes.length > 100 ? '...' : ''}</div>` : ''}
+
+                    ${intervention.photosBefore.length > 0 || intervention.photosAfter.length > 0 ? `
+                        <div class="intervention-photos">
+                            ${intervention.photosBefore.map(p => `<div class="intervention-photo-thumb"><img src="${p.data}" alt="Avant" title="Avant"></div>`).join('')}
+                            ${intervention.photosAfter.map(p => `<div class="intervention-photo-thumb"><img src="${p.data}" alt="Après" title="Après"></div>`).join('')}
+                        </div>
+                    ` : ''}
+                `;
+
+                list.appendChild(card);
+            });
+        }
+
+        function resetForm() {
+            document.getElementById('siteName').value = '';
+            document.getElementById('workType').value = '';
+            document.getElementById('interventionDate').valueAsDate = new Date();
+            document.getElementById('startTime').value = '08:00';
+            document.getElementById('endTime').value = '17:00';
+            document.getElementById('teamMember').value = '';
+            document.getElementById('status').value = 'completed';
+            document.getElementById('notes').value = '';
+            photosBeforeData = [];
+            photosAfterData = [];
+            document.getElementById('photoBefore').value = '';
+            document.getElementById('photoAfter').value = '';
+            renderPhotoPreviews();
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabName === 'list-interventions') {
+                renderInterventions();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('interventions', JSON.stringify(interventions));
+        }
+
+        // Initialisation
+        renderInterventions();
+    </script>
+</body>
+</html>
