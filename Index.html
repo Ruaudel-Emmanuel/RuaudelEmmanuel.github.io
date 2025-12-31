@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Développeur Python Full Stack freelance à Rennes. Créez vos applications web performantes avec audit gratuit et démo interactive.">
+    <meta name="keywords" content="développeur python rennes, freelance web, full stack, SaaS">
+    <title>Emmanuel Ruaudel | Développeur Python Full Stack - Démonstrations Interactives</title>
+    <style>
+        :root {
+            --color-primary: var(--color-teal-500, #218089);
+            --color-primary-hover: var(--color-teal-600, #1d7480);
+            --color-background: var(--color-cream-50, #fcfcf9);
+            --color-surface: var(--color-cream-100, #fffff5);
+            --color-text: var(--color-slate-900, #134252);
+            --color-text-secondary: var(--color-slate-500, #626c71);
+            --color-border: rgba(94, 82, 64, 0.2);
+            --color-success: #32b8c6;
+            --color-error: #c01527;
+            --color-warning: #a84b2f);
+            --radius-base: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        /* Header / Navigation */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .cta-nav {
+            background: var(--color-primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-base);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .cta-nav:hover {
+            background: var(--color-primary-hover);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 0 0 1rem 0;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-text);
+        }
+
+        .hero .tagline {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(33, 128, 137, 0.08);
+        }
+
+        /* Hero Highlight */
+        .hero-highlight {
+            background: rgba(50, 184, 198, 0.08);
+            border: 1px solid rgba(50, 184, 198, 0.2);
+            border-radius: var(--radius-base);
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .hero-highlight h3 {
+            color: var(--color-primary);
+            margin: 0 0 0.5rem 0;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-highlight p {
+            margin: 0;
+            font-size: 16px;
+            color: var(--color-text);
+        }
+
+        /* Demos Section - CRITICAL */
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 2rem 0;
+            text-align: center;
+            color: var(--color-text);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-secondary);
+            font-size: 16px;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demos-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .demo-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--color-primary);
+        }
+
+        .demo-card-header {
+            background: rgba(33, 128, 137, 0.08);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .demo-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--color-text);
+            font-size: 18px;
+        }
+
+        .demo-card .badge {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .demo-card-body {
+            padding: 1.5rem;
+        }
+
+        .demo-card p {
+            margin: 0 0 1rem 0;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .demo-features {
+            list-style: none;
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+        }
+
+        .demo-features li {
+            padding: 0.5rem 0;
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .demo-features li:before {
+            content: "✓ ";
+            color: var(--color-success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .demo-cta {
+            background: rgba(33, 128, 137, 0.1);
+            padding: 1rem;
+            border-radius: var(--radius-base);
+            text-align: center;
+        }
+
+        .demo-cta a {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 10px 18px;
+            border-radius: var(--radius-base);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .demo-cta a:hover {
+            background: var(--color-primary-hover);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-base);
+            border: 1px solid var(--color-border);
+        }
+
+        .skill-category h4 {
+            margin: 0 0 1rem 0;
+            color: var(--color-primary);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin: 0 0 1.5rem 0;
+            font-size: 32px;
+            color: var(--color-text);
+        }
+
+        .about-text p {
+            margin: 0 0 1rem 0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background: rgba(33, 128, 137, 0.08);
+            padding: 1rem;
+            border-radius: var(--radius-base);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(33, 128, 137, 0.1) 0%, rgba(50, 184, 198, 0.05) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin: 0 0 1rem 0;
+            color: var(--color-text);
+        }
+
+        .cta-section p {
+            color: var(--color-text-secondary);
+            margin: 0 0 2rem 0;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-text);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 13px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .tagline {
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .demo-card {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Emmanuel Ruaudel</a>
+            <ul class="nav-links">
+                <li><a href="#demos">Démos</a></li>
+                <li><a href="#skills">Compétences</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="/Contact.html" class="cta-nav">Devis Gratuit</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Développeur Python Full Stack<br>à Rennes</h1>
+        <p class="tagline">Transformez vos idées en applications web performantes. Audit gratuit + démonstrations interactives incluses.</p>
+        
+        <div class="hero-cta">
+            <a href="#demos" class="btn btn-primary">Voir les Démos →</a>
+            <a href="/Contact.html" class="btn btn-secondary">Demander un Audit</a>
+        </div>
+
+        <div class="hero-highlight">
+            <h3>🚀 Exclusivité Démo</h3>
+            <p>Testez directement mes applications en action. Zéro engagement, aucune installation nécessaire.</p>
+        </div>
+    </section>
+
+    <!-- Demonstrations Section (CRITICAL) -->
+    <section class="demos-section" id="demos">
+        <h2 class="section-title">Démonstrations Interactives</h2>
+        <p class="section-subtitle">Testez mes applications directement. Cliquez sur "Tester la Démo" pour explorer les fonctionnalités en action.</p>
+
+        <div class="demos-grid">
+            <!-- Demo 1 -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <h3>Application Web Dynamique</h3>
+                    <span class="badge">PYTHON + REACT</span>
+                </div>
+                <div class="demo-card-body">
+                    <p>Une application full stack complète avec backend robuste et interface utilisateur fluide. Gestion de données en temps réel.</p>
+                    <ul class="demo-features">
+                        <li>Authentification utilisateur</li>
+                        <li>Gestion de projets</li>
+                        <li>API REST performante</li>
+                        <li>Dashboard interactif</li>
+                    </ul>
+                </div>
+                <div class="demo-cta">
+                    <a href="#" onclick="alert('Démo disponible - Lien à configurer avec votre démo réelle')">Tester la Démo →</a>
+                </div>
+            </div>
+
+            <!-- Demo 2 -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <h3>Système de Gestion</h3>
+                    <span class="badge">DJANGO + POSTGRESQL</span>
+                </div>
+                <div class="demo-card-body">
+                    <p>Solution d'administration complète pour gérer votre activité. Conçue pour les PME et startups.</p>
+                    <ul class="demo-features">
+                        <li>Tableau de bord complet</li>
+                        <li>Gestion utilisateurs granulaire</li>
+                        <li>Rapports automatisés</li>
+                        <li>Exports multi-formats</li>
+                    </ul>
+                </div>
+                <div class="demo-cta">
+                    <a href="#" onclick="alert('Démo disponible - Lien à configurer avec votre démo réelle')">Tester la Démo →</a>
+                </div>
+            </div>
+
+            <!-- Demo 3 -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <h3>Plateforme Collaborative</h3>
+                    <span class="badge">FASTAPI + VUE.JS</span>
+                </div>
+                <div class="demo-card-body">
+                    <p>Espace de travail digitalisé pour les équipes distribuées. Communication et partage de fichiers intégrés.</p>
+                    <ul class="demo-features">
+                        <li>Collaboration temps réel</li>
+                        <li>Gestion de fichiers</li>
+                        <li>Notifications en temps réel</li>
+                        <li>Contrôle d'accès avancé</li>
+                    </ul>
+                </div>
+                <div class="demo-cta">
+                    <a href="#" onclick="alert('Démo disponible - Lien à configurer avec votre démo réelle')">Tester la Démo →</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Ces démos illustrent ma capacité à développer <strong>vos solutions sur mesure</strong>.</p>
+            <a href="/Contact.html" class="btn btn-primary">Parler de Votre Projet →</a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <h2 class="section-title">Compétences Techniques</h2>
+
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Backend</h4>
+                <ul>
+                    <li>Python (Django, FastAPI, Flask)</li>
+                    <li>PostgreSQL, MongoDB</li>
+                    <li>REST API, GraphQL</li>
+                    <li>Docker & Kubernetes</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h4>Frontend</h4>
+                <ul>
+                    <li>React, Vue.js</li>
+                    <li>TypeScript, JavaScript</li>
+                    <li>Tailwind CSS, Design Systems</li>
+                    <li>Performance & SEO</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h4>DevOps & Tools</h4>
+                <ul>
+                    <li>Git, CI/CD (GitHub Actions)</li>
+                    <li>AWS, Heroku, DigitalOcean</li>
+                    <li>Linux, Shell scripting</li>
+                    <li>Monitoring & Analytics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-text">
+            <h2>Qui suis-je ?</h2>
+            <p>Je suis Emmanuel Ruaudel, développeur Python Full Stack en reconversion. Basé à Rennes en Bretagne, j'allie 10 ans d'expérience en gestion de projets avec une expertise technique solide en développement web moderne.</p>
+            <p>Je transforme vos besoins en solutions robustes, évolutives et maintenables. Chaque projet est développé avec rigueur, en suivant les bonnes pratiques et en privilégiant la qualité.</p>
+
+            <div class="about-stats">
+                <div class="stat">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Ans de gestion projet</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projets complétés</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EVotre Photo Professionnelle%3C/text%3E%3C/svg%3E" alt="Emmanuel Ruaudel" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Prêt à transformer votre idée ?</h2>
+        <p>Bénéficiez d'une consultation gratuite et d'un audit personnalisé de votre projet.</p>
+        <a href="/Contact.html" class="btn btn-primary">Demander un Devis Gratuit</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Emmanuel Ruaudel | Développeur Python Full Stack | Rennes, Bretagne</p>
+        <p><a href="https://linkedin.com/in/emmanuel-ruaudel-bb5059362">LinkedIn</a> · <a href="https://github.com/Ruaudel-Emmanuel">GitHub</a> · <a href="https://malt.fr/profile/emmanuelruaudel">Malt</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll support (already in CSS)
+        // You can add tracking or analytics here
+        console.log("Landing page loaded - Ready to convert!");
+    </script>
+</body>
+</html>
