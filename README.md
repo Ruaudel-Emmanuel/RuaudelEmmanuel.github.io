@@ -1,79 +1,60 @@
-# Portfolio développeur – Flask
+# 🚀 Emmanuel Ruaudel - Full Stack Python Developer
 
-Ce dépôt contient le code source d’un petit site de portfolio développé avec Flask, incluant une page de contact fonctionnelle et plusieurs pages statiques (accueil, contact, page GitHub, etc.).  
+> 🧪 **This website showcases beta applications to validate real-world customer needs**  
+> 📍 Rennes, Brittany, France | 🌍 Remote Available
 
-## Fonctionnalités
+---
 
-- Affichage de pages HTML statiques (portfolio, compétences, projets, liens GitHub…).  
-- Formulaire de contact accessible via `/Contact.html`.  
-- Validation basique du formulaire côté serveur (vérification que tous les champs sont remplis).  
-- Messages flash pour informer l’utilisateur en cas d’erreur ou de succès lors de l’envoi du formulaire.  
-- Gestion des requêtes CORS via Flask-Cors.  
+## 🎯 Purpose: Testing Product-Market Fit
 
-## Technologies utilisées
+This portfolio website serves as **live proof-of-concept playground** for exploring which web applications solve genuine customer pain points. Rather than building in isolation, I'm **publicly testing real applications** to understand:
 
-- Python 3  
-- Flask  
-- Flask-Cors  
-- Gunicorn (pour le déploiement en production)  
-- HTML / CSS (pages `index.html`, `Contact.html`, `github.html`, etc.)  
+✅ **Does this feature matter to customers?**  
+✅ **What's the actual demand for this solution?**  
+✅ **Which product direction resonates most?**  
+✅ **Can this scale into a sustainable SaaS offering?**
 
-Les dépendances Python sont listées dans le fichier `requirements.txt`.  
+### 📊 Current Beta Applications
 
-## Installation
+All applications below are **fully functional, testable, and ready for feedback**:
 
-1. Cloner le dépôt :
+---
 
+## 🧪 Live Demos (Try Before You Buy)
 
-2. Créer et activer un environnement virtuel (recommandé) :
+### 1. **Full Stack Data Management App**
+**Status:** 🟢 Beta Testing  
+**What it does:** Real-time data operations with robust backend + modern UI  
+**Try it:** [Test the Demo →](./Contact.html)  
+**Why test it:** 
+- Evaluate backend stability under real usage
+- Gather UX feedback from actual users
+- Validate demand for this type of solution
 
+---
 
-3. Installer les dépendances :
+### 2. **Business Admin Dashboard**
+**Status:** 🟢 Beta Testing  
+**What it does:** Complete SME/startup management interface  
+**Try it:** [Test the Demo →](./Contact.html)  
+**Why test it:**
+- Identify missing admin features
+- Test workflow efficiency for small teams
+- Collect feature requests
 
+---
 
-## Configuration
+### 3. **Collaborative Workspace Platform**
+**Status:** 🟢 Beta Testing  
+**What it does:** Distributed team communication + file sharing integration  
+**Try it:** [Test the Demo →](./Contact.html)  
+**Why test it:**
+- Gauge demand for alternative team tools
+- Validate ease-of-use for non-tech users
+- Explore monetization models
 
-L’application utilise une clé secrète pour les sessions Flask (messages flash).  
-Dans `app.py`, remplace la valeur de :
+---
 
+## 💡 How This Works: The Testing Framework
 
-par une vraie clé secrète générée aléatoirement.  
-
-Si besoin, tu peux également ajouter un fichier `.env` pour centraliser les variables d’environnement (par exemple pour une future configuration d’envoi d’e-mails via Flask-Mail).  
-
-## Lancement en développement
-
-Lancer le serveur Flask en mode développement :
-
-
-Par défaut, l’application tourne en mode `debug=True` sur `http://127.0.0.1:5000/`.  
-
-- La page de contact est accessible à l’URL : `http://127.0.0.1:5000/Contact.html`  
-
-## Déploiement (exemple)
-
-Pour un déploiement sur un serveur (Linux), tu peux utiliser Gunicorn :
-
-
-Adapte ensuite la configuration avec un serveur web (Nginx, etc.) pour servir l’application en production.  
-
-## Structure du projet
-
-Exemple de structure minimale :
-
-
-Les fichiers HTML doivent se trouver dans le dossier `templates` pour être correctement rendus par `render_template`.  
-
-## Améliorations possibles
-
-- Brancher réellement le formulaire de contact à un service d’envoi d’e-mails (Flask-Mail, API externe…).  
-- Ajouter une validation plus poussée (vérification du format d’e-mail, captcha, etc.).  
-- Ajouter d’autres pages (blog, projets détaillés, CV en ligne…).  
-- Mettre en place des tests automatisés et un pipeline CI/CD complet.  
-
-## Licence
-
-Préciser ici la licence de ton choix (par exemple MIT, GPL, ou « Tous droits réservés »).
-
-
-
+### 🔄 Customer Feedback Loop
