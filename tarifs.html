@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Ruaudel | Développeur Python Full Stack</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Emmanuel Ruaudel</a>
+            <div class="hero-cta">
+                <a href="Contact.html" class="btn btn-primary">Demander un Devis Gratuit →</a>
+            </div>
+            <div class="theme-toggle">
+                <button id="themeToggle" aria-label="Toggle Dark/Light Theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="contact-header">
+            <h1>Tarification Transparente</h1>
+            <p>Des solutions adaptées à votre budget et vos besoins</p>
+        </section>
+
+        <!-- Tarification Principale -->
+        <section>
+            <h2>Tarification Principale</h2>
+            
+            <div class="pricing-grid">
+                <!-- TJM Card -->
+                <div class="pricing-card">
+                    <h3>Taux Journalier (TJM)</h3>
+                    <div class="pricing-amount">300-350€</div>
+                    <div class="pricing-period">HT / jour</div>
+                    <ul class="pricing-features">
+                        <li>Projets multi-jours</li>
+                        <li>Développement continu</li>
+                        <li>Accompagnement</li>
+                    </ul>
+                    <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-top: var(--space-4);">
+                        <strong>Idéal pour :</strong> Projets évolutifs et long terme
+                    </p>
+                </div>
+
+                <!-- Tarif Horaire Card -->
+                <div class="pricing-card">
+                    <h3>Tarif Horaire</h3>
+                    <div class="pricing-amount">45€</div>
+                    <div class="pricing-period">HT / heure</div>
+                    <ul class="pricing-features">
+                        <li>Interventions ponctuelles</li>
+                        <li>Petites corrections</li>
+                        <li>Consultations</li>
+                    </ul>
+                    <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-top: var(--space-4);">
+                        <strong>Idéal pour :</strong> Projets courts et ciblés
+                    </p>
+                </div>
+
+                <!-- Forfait Projet Card -->
+                <div class="pricing-card featured">
+                    <h3>Forfait Projet</h3>
+                    <div class="pricing-amount">À partir de</div>
+                    <div class="pricing-amount" style="font-size: 2rem;">1 500€</div>
+                    <div class="pricing-period">HT (devis personnalisé)</div>
+                    <ul class="pricing-features">
+                        <li>Projets bien définis</li>
+                        <li>Budget fixe connu</li>
+                        <li>Livraison précise</li>
+                    </ul>
+                    <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-top: var(--space-4);">
+                        <strong>Idéal pour :</strong> Scope clair et défini
+                    </p>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="card" style="margin-top: var(--space-12);">
+                <h3 style="text-align: center;">Comment ça marche ?</h3>
+                <p style="text-align: center; color: var(--color-text);">
+                    Chaque projet est unique. Je propose d'abord une <strong>consultation gratuite de 30 minutes</strong> pour comprendre vos besoins et vous présenter la formule la plus adaptée. <strong>Aucun engagement.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Forfaits Développement Web -->
+        <section>
+            <h2>Forfaits Développement Web</h2>
+            <p>Exemples de prestations courantes avec tarifs fixes</p>
+            
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Prestation</th>
+                        <th>Tarif</th>
+                        <th>Délai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Site vitrine simple</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">5 pages, design template</span>
+                        </td>
+                        <td><strong>2 500 € HT</strong></td>
+                        <td>2 semaines</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Site vitrine premium</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">10 pages, design perso, SEO</span>
+                        </td>
+                        <td><strong>4 000 € HT</strong></td>
+                        <td>3-4 semaines</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Application web simple</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">Gestion de données basique</span>
+                        </td>
+                        <td><strong>À partir de 3 500 € HT</strong></td>
+                        <td>Devis</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Automatisation processus</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">Scripts, intégrations métier</span>
+                        </td>
+                        <td><strong>1 500 € - 4 000 € HT</strong></td>
+                        <td>Variable</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Tarifs Adaptés à Votre Profil -->
+        <section>
+            <h2>Tarifs Adaptés à Votre Profil</h2>
+            <p>Je m'adapte à votre structure et vos contraintes</p>
+            
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Profil</th>
+                        <th>TJM</th>
+                        <th>Approche</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Artisan / TPE</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">Petit budget, solution pragmatique</span>
+                        </td>
+                        <td><strong>250 € - 300 €</strong></td>
+                        <td>Forfaits accessibles, paiement échelonné possible</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>PME</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">Budget structuré, processus formels</span>
+                        </td>
+                        <td><strong>320 € - 380 €</strong></td>
+                        <td>TJM standard, contrats cadre, multi-phases</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Grandes entreprises</strong><br>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9rem;">Exigences élevées, long terme</span>
+                        </td>
+                        <td><strong>380 € - 450 €</strong></td>
+                        <td>TJM supérieur, garanties, professionnalisme</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Questions Fréquentes -->
+        <section class="faq-section">
+            <h2>Questions Fréquentes</h2>
+
+            <div class="faq-item">
+                <h3>Quel est votre délai pour un premier devis ?</h3>
+                <p>
+                    Je propose une <strong>consultation gratuite de 30 minutes</strong> pour comprendre votre besoin et vous présenter la formule adaptée. Vous recevez un devis détaillé sous <strong>48h</strong>. <strong>Zéro engagement.</strong>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Puis-je négocier vos tarifs ?</h3>
+                <p>
+                    Mes tarifs sont justes et transparents. Je suis ouvert à <strong>adapter le périmètre du projet</strong> pour coller à votre budget : MVP, paiement échelonné, ou déploiement en phases. <strong>Parlons-en !</strong>
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Quelle est la différence entre TJM et forfait ?</h3>
+                <p>
+                    <strong>TJM</strong> : vous payez par jour, adapté aux projets évolutifs.<br>
+                    <strong>Forfait</strong> : prix fixe connu d'avance, idéal pour un scope clair. Je recommande le <strong>forfait</strong> pour les petits projets et le <strong>TJM</strong> pour les missions complexes.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Incluez-vous l'hébergement et la maintenance ?</h3>
+                <p>
+                    Non. Le forfait de développement couvre la <strong>création et les tests</strong>. L'hébergement et la maintenance post-livraison peuvent être facturés à part, ou gérés directement par vous.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Comment se passe le paiement ?</h3>
+                <p>
+                    <strong>Pour les forfaits :</strong> 30% à la commande, solde à la livraison. <strong>Paiement échelonné (3x sans frais)</strong> possible pour projets > 3 000 €.<br>
+                    <strong>Pour les TJM :</strong> facturation mensuelle.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Pouvez-vous travailler sur budget très restreint ?</h3>
+                <p>
+                    <strong>Oui.</strong> Je peux discuter d'un <strong>MVP</strong> ou d'une version allégée pour démarrer. Plutôt que 5 000 € pour le projet complet, on fait <strong>1 500 € pour une v1 fonctionnelle</strong>, puis on ajoute des features progressivement.
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="cta-section">
+            <h2>Prêt à démarrer votre projet ?</h2>
+            <p style="margin-bottom: var(--space-8); color: var(--color-text);">
+                Contactez-moi pour une consultation gratuite et un devis sans engagement.
+            </p>
+            <a href="Contact.html" class="btn btn-primary btn-lg">Demander un Devis Gratuit →</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Emmanuel Ruaudel. Tous droits réservés.</p>
+        <p><a href="Contact.html">Contact</a> | <a href="index.html">Accueil</a> | <a href="#">Mentions légales</a></p>
+    </footer>
+<script>
+    // Récupérer le bouton et l'élément html
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    // Charger le thème sauvegardé (ou utiliser la préférence système)
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateToggleButton(savedTheme);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                htmlElement.setAttribute('data-theme', 'dark');
+                updateToggleButton('dark');
+            }
+        }
+    }
+    
+    // Mettre à jour le bouton
+    function updateToggleButton(theme) {
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+    
+    // Basculer le thème
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleButton(newTheme);
+        });
+    }
+    
+    // Initialiser au chargement
+    initTheme();
+</script>
+
+</body>
+</html>
