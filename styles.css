@@ -129,6 +129,7 @@ nav a:hover {
 
 /* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle {
+  margin-top: 12px; 
   background: transparent;
   border: 2px solid var(--color-border);
   color: var(--color-text);
@@ -204,6 +205,10 @@ main {
   border: none;
   cursor: pointer;
   font-size: var(--font-size-base);
+}
+
+.btn.btn-primary {
+  margin-top: 20px; /* ajuste la valeur (px/rem) comme tu veux */
 }
 
 .btn:focus-visible {
@@ -770,9 +775,12 @@ footer a:hover {
     padding: var(--space-6);
   }
 
-  .nav-container {
-    padding: 0 var(--space-4);
-  }
+.nav-container {
+  display: flex;
+  align-items: center;
+}
+
+
 }
 
 /* ===== PRINT STYLES ===== */
