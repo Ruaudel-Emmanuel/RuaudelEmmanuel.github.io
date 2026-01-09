@@ -208,7 +208,7 @@ main {
 }
 
 .btn.btn-primary {
-  margin-top: 20px; /* ajuste la valeur (px/rem) comme tu veux */
+  margin-top: 1px; /* ajuste la valeur (px/rem) comme tu veux */
 }
 
 .btn:focus-visible {
