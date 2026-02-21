@@ -1,4 +1,4 @@
-# 🚀 Emmanuel Ruaudel - Full Stack Python Developer
+# 🚀 Emmanuel Ruaudel - Full Stack Developer
 
 > 🧪 **This website showcases beta applications to validate real-world customer needs**  
 > 📍 Rennes, Brittany, France | 🌍 Remote Available
@@ -58,3 +58,4 @@ All applications below are **fully functional, testable, and ready for feedback*
 ## 💡 How This Works: The Testing Framework
 
 ### 🔄 Customer Feedback Loop
+
