@@ -4,18 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Développeur Python Full Stack à Rennes, j'automatise vos processus métier avec n8n et l'IA : génération de devis, suivi de chantier, intégrations sur mesure. Audit gratuit et démonstrations interactives pour TPE/PME">
-    <title>Développeur Python à Rennes | Automatisation n8n, IA et applications web sur mesure | https://ruaudel-emmanuel.github.io/RuaudelEmmanuel.github.io/ </title>
+    <title>Développeur Python à Rennes | Automatisation n8n, IA et applications web sur mesure | https://www.rennesdev.fr/ </title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="header-spacer"></div>
-  <nav class="nav-container">
-    <a href="index.html" class="logo">Emmanuel Ruaudel</a>
-    <a href="Contact.html" class="btn btn-primary">Demander un Devis Gratuit →</a>
-    <div class="theme-toggle">
-      <button id="themeToggle" aria-label="Toggle Dark/Light Theme">🌙</button>
-    </div>
-  </nav>
+
  
     <main>
 
@@ -29,135 +22,12 @@
 
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Développeur Python à Rennes, expert en automatisation n8n et IA pour vos applications web sur mesure</h1>
-            <p class="hero-subtitle">Audit gratuit + démonstrations interactives incluses.</p>
-            <div class="hero-buttons">
-                <a href="#demos" class="btn btn-primary">Découvrez les démos</a>
-                <a href="Contact.html" class="btn btn-secondary">Demander un Audit →</a>
+            <h1>Nouveau site web :</h1>
+              <div class="hero-buttons">
+                <a href="https://www.rennesdev.fr" class="btn btn-secondary" target="_blank">Rennesdev.fr →</a>
             </div>
         </section>
 
-        <!-- Demos Section -->
-        <section id="demos" class="demos-section">
-            <h2>Testez mes applications directement</h2>
-            <p class="demos-intro">Testez directement mes applications en action. Zéro engagement, aucune installation nécessaire.</p>
-            <p class="demos-subtitle">Cliquez sur "Testez la Démo" pour explorer les fonctionnalités en action.</p>
-
-            <div class="demos-grid">
-                <!-- Demo 1: Devis Generator -->
-                <div class="card">
-                    <h3>Générateur de Devis</h3>
-                    <p>Créez des devis professionnels en quelques secondes. Automatisez vos tarifs et générez des PDF instantanément.</p>
-                    <a href="Generateur-Devis-Automatise.html" class="btn btn-primary">Testez la Démo →</a>
-                </div>
-
-                <!-- Demo 2: Planning Manager -->
-                <div class="card">
-                    <h3>Gestionnaire de Planning</h3>
-                    <p>Organisez vos équipes, planifiez les tâches et synchronisez tous les intervenants sur un planning unique.</p>
-                    <a href="Planificateur-Chantier-Equipes.html" class="btn btn-primary">Testez la Démo →</a>
-                </div>
-
-                <!-- Demo 3: Freelance Manager -->
-                <div class="card">
-                    <h3>Suivi projet freelance</h3>
-                    <p>Tracez l'historique administratif et comptable de projet créatif.</p>
-                    <a href="Freelance-Manager.html" class="btn btn-primary">Testez la Démo →</a>
-                </div>
-            </div>
-
-            <p class="demos-conclusion">Ces démos illustrent ma capacité à développer <strong>vos solutions sur mesure</strong>.</p>
-        </section>
-
-        <!-- About Section -->
-        <section class="about-section">
-            <h2>À propos de moi</h2>
-            <div class="about-content">
-                <p>Je suis <strong>Emmanuel Ruaudel</strong>, développeur <strong>Python Full Stack</strong> en reconversion. Basé à Rennes en Bretagne, j'allie 15 ans d'expérience en gestion de projets avec une expertise technique solide en développement web moderne.</p>
-
-                <p>Je transforme vos besoins en solutions robustes, évolutives et maintenables. Chaque projet est développé avec rigueur, en suivant les bonnes pratiques et en privilégiant la qualité.</p>
-
-                <p>Bénéficiez d'une consultation gratuite et d'un audit personnalisé de votre projet.</p>
-            </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="cta-section">
-            <h2>Prêt à transformer votre projet ?</h2>
-            <a href="Contact.html" class="btn btn-primary">Demander un Devis Gratuit →</a>
-        </section>
-    </main>
-
-<script>
-    // Récupérer le bouton et l'élément html
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
-    
-    // Charger le thème sauvegardé (ou utiliser la préférence système)
-    function initTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            htmlElement.setAttribute('data-theme', savedTheme);
-            updateToggleButton(savedTheme);
-        } else {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) {
-                htmlElement.setAttribute('data-theme', 'dark');
-                updateToggleButton('dark');
-            }
-        }
-    }
-    
-    // Mettre à jour le bouton
-    function updateToggleButton(theme) {
-        if (themeToggle) {
-            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-    }
-    
-    // Basculer le thème
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateToggleButton(newTheme);
-        });
-    }
-    
-    // Initialiser au chargement
-    initTheme();
-</script>
-
-    <footer>
-        <h3 style="margin-bottom: 20px;">Me contacter et me suivre</h3>
-        <p>Retrouvez-moi sur mes différentes plateformes professionnelles :</p>
-        
-        <div class="social-links">
-
-            <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank" rel="noopener noreferrer" title="Malt">
-                Malt
-            </a>
-            <a href="https://www.upwork.com/freelancers/~0196500c283c099531" target="_blank" rel="noopener noreferrer" title="Upwork">
-                Upwork
-            </a>
-            <a href="https://comeup.com/fr/sales/services" target="_blank" rel="noopener noreferrer" title="ComeUp">
-                ComeUp
-            </a>
-            <a href="https://github.com/Ruaudel-Emmanuel" target="_blank" rel="noopener noreferrer" title="GitHub">
-                GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                LinkedIn
-            </a>
-        </div>
-
-        <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
-            &copy; 2026 Emmanuel Ruaudel. Tous droits réservés.
-        </p>
-    </footer>
 
 </body>
 
